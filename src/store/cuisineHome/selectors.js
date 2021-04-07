@@ -14,7 +14,7 @@ export const selectCuisineHome = (searchText, set_sortBy) => (reduxState) => {
 
   return cloneProduct.sort((a, b) => {
     if (set_sortBy === "likes") return parseInt(b.likes - a.likes);
-    else return b.cookingTime - a.cookingTime;
+    else return a.cookingTime - b.cookingTime;
   });
 };
 
