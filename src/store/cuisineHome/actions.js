@@ -27,13 +27,13 @@ export async function fetchcuisineList(dispatch, getState) {
 export const updateCuisineLike = (cuisineId) => async (dispatch, getState) => {
   // const { token } = selectUser(getState());
 
-  // console.log("token", token);
+  //console.log("token", token);
   try {
     const response = await axios.patch(`${apiUrl}/cuisines/${cuisineId}`);
 
     console.log(response);
 
-    dispatch(cuisineLiked(response.data));
+    dispatch(cuisineLiked(response.data.cuisine));
   } catch (e) {
     console.log(e.message);
   }

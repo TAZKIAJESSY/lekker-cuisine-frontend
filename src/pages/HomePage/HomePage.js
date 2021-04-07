@@ -81,6 +81,7 @@ export default function HomePage() {
             return (
               <div className="col-lg-3" key={index}>
                 <CuisineList
+                  id={cui.id}
                   title={cui.title}
                   imageUrl={cui.imageUrl}
                   likes={cui.likes}

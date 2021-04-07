@@ -28,6 +28,6 @@ export const selectCuisineHome = (searchText, set_sortBy) => (reduxState) => {
   });
 };
 
-export const selectUpdateLike = (reduxState) => {
-  return reduxState.cuisineHome.cuisines;
-};
+// export const selectUpdateLike = (reduxState) => {
+//   return reduxState.cuisineHome.cuisines;
+// };
