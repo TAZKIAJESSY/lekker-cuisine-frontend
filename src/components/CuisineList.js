@@ -10,6 +10,8 @@ export default function CuisineList(props) {
           src={props.imageUrl}
           alt={props.title}
         ></img>
+        <p className="card-text">{props.likes}</p>
+        <p>{props.ingredients}</p>
       </div>
     </div>
   );
