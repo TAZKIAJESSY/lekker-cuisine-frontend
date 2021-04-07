@@ -34,8 +34,8 @@ export default function HomePage() {
                 set_sortBy(e.target.value);
               }}
             >
-              <option value="likes">Likes</option>
-              <option value="cookingTime">cookingTime</option>
+              <option value="likes">Most Popular ♥ </option>
+              <option value="cookingTime">Cooking Time 🕒 </option>
             </select>
           </div>
           <div>
