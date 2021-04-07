@@ -8,13 +8,10 @@ import { selectCuisineHome } from "../../store/cuisineHome/selectors";
 
 export default function HomePage() {
   const [searchText, set_searchText] = useState("");
+  const [sortBy, set_sortBy] = useState("");
 
   const dispatch = useDispatch();
-  const cuisine = useSelector(selectCuisineHome);
-
-  const filtered_cuisine = [...cuisine].filter((cui) => {
-    return cui.title.toUpperCase().includes(searchText.toUpperCase());
-  });
+  const cuisine = useSelector(selectCuisineHome(searchText, sortBy));
 
   useEffect(() => {
     dispatch(fetchcuisineList);
@@ -29,6 +26,17 @@ export default function HomePage() {
             <button>French</button>
             <button>Thai</button>
             <button>Mixed</button>
+          </div>
+          <div>
+            <label>Sort By:</label>
+            <select
+              onChange={(e) => {
+                set_sortBy(e.target.value);
+              }}
+            >
+              <option value="likes">Likes</option>
+              <option value="cookingTime">cookingTime</option>
+            </select>
           </div>
           <div>
             {" "}
@@ -48,7 +56,7 @@ export default function HomePage() {
       </div>{" "}
       <div className="card-container">
         <div className="row">
-          {filtered_cuisine.map((cui, index) => {
+          {cuisine.map((cui, index) => {
             return (
               <div className="col-lg-3" key={index}>
                 <CuisineList
