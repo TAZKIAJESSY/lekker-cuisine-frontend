@@ -22,10 +22,30 @@ export default function HomePage() {
         <div className="row">
           <div>
             {" "}
-            <button>Italian</button>
-            <button>French</button>
-            <button>Thai</button>
-            <button>Mixed</button>
+            <button
+              value="Italian"
+              onClick={(e) => set_searchText(e.target.value)}
+            >
+              Italian
+            </button>
+            <button
+              value="French"
+              onClick={(e) => set_searchText(e.target.value)}
+            >
+              French
+            </button>
+            <button
+              value="Thai"
+              onClick={(e) => set_searchText(e.target.value)}
+            >
+              Thai
+            </button>
+            <button
+              value="Mixed"
+              onClick={(e) => set_searchText(e.target.value)}
+            >
+              Mixed
+            </button>
           </div>
           <div>
             <label>Sort By:</label>
@@ -34,6 +54,7 @@ export default function HomePage() {
                 set_sortBy(e.target.value);
               }}
             >
+              <option value="sort"></option>
               <option value="likes">Most Popular ♥ </option>
               <option value="cookingTime">Cooking Time 🕒 </option>
             </select>
@@ -63,6 +84,7 @@ export default function HomePage() {
                   title={cui.title}
                   imageUrl={cui.imageUrl}
                   likes={cui.likes}
+                  cookingTime={cui.cookingTime}
                 />
               </div>
             );

@@ -11,6 +11,7 @@ export default function CuisineList(props) {
           alt={props.title}
         ></img>
         <p className="card-text">{props.likes}</p>
+        <p>{props.cookingTime} min</p>
       </div>
     </div>
   );
