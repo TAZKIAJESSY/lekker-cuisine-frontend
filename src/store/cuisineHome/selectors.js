@@ -4,7 +4,7 @@
 
 export const selectCuisineHome = (searchText, set_sortBy) => (reduxState) => {
   let cloneProduct = [...reduxState.cuisineHome.cuisines];
-  console.log(searchText);
+  // console.log(searchText);
 
   if (searchText) {
     cloneProduct = cloneProduct.filter((c) => {
@@ -26,4 +26,8 @@ export const selectCuisineHome = (searchText, set_sortBy) => (reduxState) => {
     //decending order
     else return a.cookingTime - b.cookingTime; //ascending
   });
+};
+
+export const selectUpdateLike = (reduxState) => {
+  return reduxState.cuisineHome.cuisines;
 };

@@ -10,8 +10,10 @@ export default function CuisineList(props) {
           src={props.imageUrl}
           alt={props.title}
         ></img>
-        <p className="card-text">{props.likes}</p>
-        <p>{props.cookingTime} min</p>
+        <button className="btn" style={{ marginLeft: 90, marginTop: 10 }}>
+          {props.likes}
+        </button>
+        <p className="card-text">{props.cookingTime} min</p>
       </div>
     </div>
   );
