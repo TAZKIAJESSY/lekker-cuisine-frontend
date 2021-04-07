@@ -20,7 +20,7 @@ export default function CuisineList(props) {
           alt={props.title}
         ></img>
         <button
-          className="btn"
+          className="btn btn-outline-secondary"
           onClick={() => {
             updateLikes();
           }}
