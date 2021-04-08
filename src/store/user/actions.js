@@ -1,4 +1,4 @@
-import { apiUrl } from "../../config/constants";
+import { apiUrl } from "../../confiig/constants";
 import axios from "axios";
 import { selectToken } from "./selectors";
 import {
@@ -26,12 +26,13 @@ const tokenStillValid = (userWithoutToken) => ({
 
 export const logOut = () => ({ type: LOG_OUT });
 
-export const signUp = (name, email, password) => {
+export const signUp = (firstName, lastName, email, password) => {
   return async (dispatch, getState) => {
     dispatch(appLoading());
     try {
       const response = await axios.post(`${apiUrl}/signup`, {
-        name,
+        firstName,
+        lastName,
         email,
         password,
       });
