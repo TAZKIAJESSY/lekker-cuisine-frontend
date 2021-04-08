@@ -1,7 +1,7 @@
 import "./App.css";
 import { Switch, Route } from "react-router-dom";
-import NavBar from "./components/NavBar/NavBar";
-import HomePage from "./pages/HomePage/HomePage";
+import NavBar from "./components/NavBar/NavBarItem";
+import HomePage from "./pages/Home/HomePage";
 
 function App() {
   return (
