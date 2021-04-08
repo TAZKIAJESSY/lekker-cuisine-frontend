@@ -11,11 +11,12 @@ export default function HomePage() {
   const [sortBy, set_sortBy] = useState("");
 
   const dispatch = useDispatch();
-  const cuisine = useSelector(selectCuisineHome(searchText, sortBy));
+  const cuisines = useSelector(selectCuisineHome(searchText, sortBy));
 
   useEffect(() => {
     dispatch(fetchcuisineList);
   }, [dispatch]);
+
   return (
     <div className="container">
       <div className="button-container">
@@ -77,7 +78,7 @@ export default function HomePage() {
       </div>{" "}
       <div className="card-container">
         <div className="row">
-          {cuisine.map((cui, index) => {
+          {cuisines.map((cui, index) => {
             return (
               <div className="col-lg-3" key={index}>
                 <CuisineList
