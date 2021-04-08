@@ -32,7 +32,11 @@ export default function Login() {
   }
 
   return (
-    <Container>
+    <Container
+      style={{
+        backgroundImage: `url("https://res.cloudinary.com/jessy/image/upload/v1617910772/login-background_hy3pwa.jpg")`,
+      }}
+    >
       <Form as={Col} md={{ span: 6, offset: 3 }} className="mt-5">
         <h1 className="mt-5 mb-5">Login</h1>
         <Form.Group controlId="formBasicEmail">

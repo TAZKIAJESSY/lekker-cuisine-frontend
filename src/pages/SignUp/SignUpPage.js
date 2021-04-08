@@ -36,7 +36,11 @@ export default function SignUp() {
   }
 
   return (
-    <Container>
+    <Container
+      style={{
+        backgroundImage: `url("https://res.cloudinary.com/jessy/image/upload/v1617910759/signup_smwwbo.webp")`,
+      }}
+    >
       <Form as={Col} md={{ span: 6, offset: 3 }} className="mt-5">
         <h1 className="mt-5 mb-5">Signup</h1>
         <Form.Group controlId="formBasicName">
