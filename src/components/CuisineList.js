@@ -10,6 +10,17 @@ export default function CuisineList(props) {
     dispatch(updateCuisineLike(props.id));
   };
 
+  const defaultProps = {
+    servings: false,
+    calories: false,
+    instructions: false,
+  };
+  // const propTypes = {
+  //   servings: PropTypes.bool.isRequired,
+  // };
+
+  CuisineList.defaultProps = defaultProps;
+
   return (
     <div className="card shadow-lg mb-4">
       <div className="card-body pb-0">
@@ -39,12 +50,19 @@ export default function CuisineList(props) {
         </div>
 
         <p className="card-text">{props.cookingTime} min</p>
-        <p className="card-text">Servings: {props.servings} </p>
-        <p className="card-text">Calorie per serving: {props.calories} </p>
+        {props.servings ? (
+          <p className="card-text">Servings: {props.servings} </p>
+        ) : null}
 
-        <p className="card-text">
-          <b>Instructions:</b> {props.instructions}{" "}
-        </p>
+        {props.calories ? (
+          <p className="card-text">Calorie per serving: {props.calories} </p>
+        ) : null}
+
+        {props.instructions ? (
+          <p className="card-text">
+            <b>Instructions:</b> {props.instructions}{" "}
+          </p>
+        ) : null}
       </div>
     </div>
   );

@@ -87,6 +87,9 @@ export default function HomePage() {
                   imageUrl={cui.imageUrl}
                   likes={cui.likes}
                   cookingTime={cui.cookingTime}
+                  servings={false}
+                  instructions={false}
+                  calories={false}
                 />
               </div>
             );
