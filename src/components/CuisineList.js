@@ -6,7 +6,7 @@ export default function CuisineList(props) {
   const dispatch = useDispatch();
 
   const updateLikes = () => {
-    console.log("updating likes for cuisine : ", props.id);
+    // console.log("updating likes for cuisine : ", props.id);
     dispatch(updateCuisineLike(props.id));
   };
 
