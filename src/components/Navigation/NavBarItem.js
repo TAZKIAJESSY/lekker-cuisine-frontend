@@ -1,6 +1,15 @@
+import React from "react";
 import { NavLink } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { selectToken } from "../../store/user/selectors";
+import LoggedIn from "./LoggedIn";
+import LoggedOut from "./LoggedOut";
 
-function NavBar() {
+function NavBarItem() {
+  const token = useSelector(selectToken);
+
+  const loginLogoutControls = token ? <LoggedIn /> : <LoggedOut />;
+
   return (
     <div
       style={{
@@ -18,8 +27,10 @@ function NavBar() {
       <NavLink to="/login" activeStyle={{ color: "teal" }}>
         Login
       </NavLink>
+
+      {loginLogoutControls}
     </div>
   );
 }
 
-export default NavBar;
+export default NavBarItem;

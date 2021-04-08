@@ -1,10 +1,10 @@
 import React from "react";
-import NavbarItem from "./NavbarItem";
+import Nav from "react-bootstrap/Nav";
 
 export default function LoggedOut() {
   return (
     <>
-      <NavbarItem path="/login" linkText="Login" />
+      <Nav.Item path="/login" linkText="Login" />
     </>
   );
 }
