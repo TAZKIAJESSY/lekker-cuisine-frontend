@@ -11,9 +11,15 @@ import Login from "./pages/Login/LoginPage";
 
 import { useDispatch, useSelector } from "react-redux";
 import { selectAppLoading } from "./store/appState/selectors";
+import { getUserWithStoredToken } from "./store/user/actions";
 
 function App() {
+  const dispatch = useDispatch();
   const isLoading = useSelector(selectAppLoading);
+
+  useEffect(() => {
+    dispatch(getUserWithStoredToken());
+  }, [dispatch]);
 
   return (
     <div className="App">
