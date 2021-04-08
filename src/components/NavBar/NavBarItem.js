@@ -15,6 +15,9 @@ function NavBar() {
       <NavLink exact to="/" activeStyle={{ color: "teal" }}>
         Cuisines
       </NavLink>
+      <NavLink to="/login" activeStyle={{ color: "teal" }}>
+        Login
+      </NavLink>
     </div>
   );
 }
