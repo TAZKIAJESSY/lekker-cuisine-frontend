@@ -38,6 +38,9 @@ export default function DetailsPage() {
               imageUrl={cuisine.imageUrl}
               likes={cuisine.likes}
               cookingTime={cuisine.cookingTime}
+              instructions={cuisine.instructions}
+              servings={cuisine.servings}
+              calories={cuisine.calories}
             />{" "}
           </div>
         </div>
