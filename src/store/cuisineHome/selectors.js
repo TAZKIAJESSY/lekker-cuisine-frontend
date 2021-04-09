@@ -1,6 +1,6 @@
-// export const selectCuisineHome = (reduxState) => {
-//   return reduxState.cuisineHome.cuisines;
-// };
+export const selectCuisineHomeCommon = (reduxState) => {
+  return reduxState.cuisineHome.cuisines;
+};
 
 export const selectCuisineHome = (searchText, filterText, set_sortBy) => (
   reduxState
