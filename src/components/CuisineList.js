@@ -37,7 +37,8 @@ export default function CuisineList(props) {
             alt={props.title}
           ></img>
         </Link>
-        <div style={{ marginLeft: 90, marginTop: 10 }}>
+        <div style={{ marginTop: 10, marginBottom: 10 }}>
+          <button className="btn btn-basic">💚</button>
           <button
             className="btn btn-basic"
             onClick={() => {
@@ -46,7 +47,7 @@ export default function CuisineList(props) {
           >
             👍
           </button>
-          <span>{props.likes}</span>
+          <span>{props.likes}</span>{" "}
         </div>
 
         <p className="card-text">{props.cookingTime} min</p>
@@ -64,10 +65,6 @@ export default function CuisineList(props) {
             <b>Instructions:</b> {props.instructions}{" "}
           </p>
         ) : null}
-
-        <p>
-          <button className="btn btn-basic">🖤</button>
-        </p>
       </div>
     </div>
   );
