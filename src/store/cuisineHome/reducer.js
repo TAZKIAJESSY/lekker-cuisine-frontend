@@ -1,11 +1,14 @@
 const initialState = {
   cuisines: [],
+  cuisineDetails: null,
+  favourites: [],
 };
 
 export default function cuisineHomeReducer(state = initialState, action) {
   switch (action.type) {
     case "cuisineHome/allCuisineFetched": {
       return {
+        ...state,
         cuisines: action.payload,
       };
     }
@@ -18,11 +21,25 @@ export default function cuisineHomeReducer(state = initialState, action) {
       //update here the likes for a  cuisine
       newArray[index].likes = action.payload.likes;
 
+      const newArrayFav = [...state.favourites]; //making a new array
+
+      const indexFav = state.favourites.findIndex(
+        (c) => c.cuisineId === action.payload.id
+      ); //finding index of the item
+      //update here the likes for a  cuisine
+      newArrayFav[indexFav].cuisine.likes = action.payload.likes;
+
       return {
         ...state,
         cuisines: newArray,
+        favourites: newArrayFav,
       };
     }
+
+    case "userFav/userFavFetched": {
+      return { ...state, favourites: [...action.payload] };
+    }
+
     default: {
       return state;
     }

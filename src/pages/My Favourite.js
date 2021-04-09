@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { selectUser } from "../store/user/selectors";
-import { selectUserFav } from "../store/userFav/selectors";
+import { selectUserFav } from "../store/cuisineHome/selectors";
 
 import CuisineList from "../components/CuisineList";
-import { fetchFavouriteList } from "../store/userFav/actions";
+import { fetchFavouriteList } from "../store/cuisineHome/actions";
 
 export default function MyFavourite() {
   const dispatch = useDispatch();

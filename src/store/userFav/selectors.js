@@ -1,3 +1,3 @@
-export const selectUserFav = (reduxState) => {
-  return reduxState.userFav.favourites;
-};
+// export const selectUserFav = (reduxState) => {
+//   return reduxState.userFav.favourites;
+// };

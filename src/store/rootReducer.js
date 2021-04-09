@@ -8,5 +8,5 @@ export default combineReducers({
   cuisineHome,
   appState,
   user,
-  userFav,
+  // userFav,
 });

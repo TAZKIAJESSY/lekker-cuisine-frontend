@@ -1,7 +1,3 @@
-export const selectCuisineHomeCommon = (reduxState) => {
-  return reduxState.cuisineHome.cuisines;
-};
-
 export const selectCuisineHome = (searchText, filterText, set_sortBy) => (
   reduxState
 ) => {
@@ -55,4 +51,8 @@ export const selectCuisineDetails = (id) => (reduxState) => {
   console.log("Find data: ", cus);
 
   return cus;
+};
+
+export const selectUserFav = (reduxState) => {
+  return reduxState.cuisineHome.favourites;
 };
