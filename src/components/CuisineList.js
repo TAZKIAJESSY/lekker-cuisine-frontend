@@ -50,6 +50,7 @@ export default function CuisineList(props) {
         </div>
 
         <p className="card-text">{props.cookingTime} min</p>
+
         {props.servings ? (
           <p className="card-text">Servings: {props.servings} </p>
         ) : null}
@@ -63,6 +64,10 @@ export default function CuisineList(props) {
             <b>Instructions:</b> {props.instructions}{" "}
           </p>
         ) : null}
+
+        <p>
+          <button className="btn btn-basic">🖤</button>
+        </p>
       </div>
     </div>
   );
