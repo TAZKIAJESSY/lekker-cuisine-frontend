@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import CuisineList from "../../components/CuisineList";
 
@@ -7,15 +7,27 @@ import { fetchcuisineList } from "../../store/cuisineHome/actions";
 import { selectCuisineHome } from "../../store/cuisineHome/selectors";
 
 export default function HomePage() {
+  const history = useHistory();
+  const { text } = useParams();
+
+  console.log("what is params", text);
   const [searchText, set_searchText] = useState("");
   const [sortBy, set_sortBy] = useState("");
 
   const dispatch = useDispatch();
-  const cuisines = useSelector(selectCuisineHome(searchText, sortBy));
+
+  const cuisines = useSelector(selectCuisineHome(text, sortBy));
+
+  const addSearchUrl = (e) => {
+    e.preventDefault();
+    const route_parameter = encodeURIComponent(searchText);
+
+    history.push(`/${route_parameter}`);
+  };
 
   useEffect(() => {
     dispatch(fetchcuisineList);
-  }, [dispatch]);
+  }, [dispatch, text]);
 
   return (
     <div className="container">
@@ -62,11 +74,7 @@ export default function HomePage() {
           </div>
           <div>
             {" "}
-            <form
-              onSubmit={(e) => {
-                e.preventDefault();
-              }}
-            >
+            <form onSubmit={addSearchUrl}>
               <input
                 type={searchText}
                 onChange={(e) => set_searchText(e.target.value)}

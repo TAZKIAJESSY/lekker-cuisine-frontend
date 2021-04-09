@@ -16,9 +16,9 @@ export default function DetailsPage() {
 
   console.log("what is cuisine:", cuisine);
 
-  //   useEffect(() => {
-  //     dispatch(fetchcuisineList);
-  //   }, [dispatch]);
+  useEffect(() => {
+    dispatch(fetchcuisineList);
+  }, [dispatch]);
 
   return (
     <div className="container">
@@ -34,14 +34,14 @@ export default function DetailsPage() {
         <div className="row">
           <div className="col-lg-12">
             <CuisineList
-              id={cuisine.id}
-              title={cuisine.title}
-              imageUrl={cuisine.imageUrl}
-              likes={cuisine.likes}
-              cookingTime={cuisine.cookingTime}
-              instructions={cuisine.instructions}
-              servings={cuisine.servings}
-              calories={cuisine.calories}
+              id={cuisine?.id}
+              title={cuisine?.title}
+              imageUrl={cuisine?.imageUrl}
+              likes={cuisine?.likes}
+              cookingTime={cuisine?.cookingTime}
+              instructions={cuisine?.instructions}
+              servings={cuisine?.servings}
+              calories={cuisine?.calories}
             />{" "}
           </div>
         </div>
