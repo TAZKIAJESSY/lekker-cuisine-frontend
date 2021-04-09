@@ -1,4 +1,5 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
+import Carousel from "react-bootstrap/Carousel";
 import { useDispatch, useSelector } from "react-redux";
 import { selectUser } from "../store/user/selectors";
 import { selectUserFav } from "../store/cuisineHome/selectors";
@@ -17,12 +18,17 @@ export default function MyFavourite() {
 
   return (
     <div>
-      <div>{user.firstName}'s Kitchen</div>{" "}
-      <div className="card-container">
-        <div className="row">
+      <div style={{ marginTop: 50, marginBottom: 50 }}>
+        <b style={{ color: "teal" }}>{user.firstName}'s</b> Kitchen
+      </div>
+      <div>Carousel for your fav cuisines... Hurray!!! </div>
+
+      <div style={{ margin: 200 }}>
+        <Carousel className="mt-9" style={{}}>
+          {" "}
           {fav.map((f, index) => {
             return (
-              <div className="col-lg-3" key={index}>
+              <Carousel.Item key={index} style={{ backgroundColor: "teal" }}>
                 <CuisineList
                   id={f.cuisine.id}
                   title={f.cuisine.title}
@@ -30,10 +36,10 @@ export default function MyFavourite() {
                   likes={f.cuisine.likes}
                   cookingTime={f.cuisine.cookingTime}
                 />
-              </div>
+              </Carousel.Item>
             );
-          })}{" "}
-        </div>
+          })}
+        </Carousel>
       </div>
     </div>
   );
