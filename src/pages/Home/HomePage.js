@@ -1,28 +1,48 @@
 import { useState, useEffect } from "react";
-import { Link, useHistory, useParams } from "react-router-dom";
+import { Link, useHistory, useParams, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import CuisineList from "../../components/CuisineList";
+import queryString from "query-string";
 
+import CuisineList from "../../components/CuisineList";
 import { fetchcuisineList } from "../../store/cuisineHome/actions";
 import { selectCuisineHome } from "../../store/cuisineHome/selectors";
 
 export default function HomePage() {
   const history = useHistory();
+  const dispatch = useDispatch();
   const { text } = useParams();
 
-  console.log("what is params", text);
-  const [searchText, set_searchText] = useState("");
+  const { search } = useLocation();
+  const { custype } = queryString.parse(search);
+
+  //console.log("Query: ", custype);
+
+  console.log("what is text", text);
+  const [searchText, set_searchText] = useState();
+  const [filterText, set_filterText] = useState();
   const [sortBy, set_sortBy] = useState("");
 
-  const dispatch = useDispatch();
-
-  const cuisines = useSelector(selectCuisineHome(text, sortBy));
+  const cuisines = useSelector(
+    selectCuisineHome(searchText, filterText, sortBy)
+  );
 
   const addSearchUrl = (e) => {
     e.preventDefault();
     const route_parameter = encodeURIComponent(searchText);
 
     history.push(`/${route_parameter}`);
+  };
+
+  const addQueryurl = (e) => {
+    set_filterText(e.target.value);
+
+    console.log("custype text: ", filterText);
+
+    const route_parameter = encodeURIComponent(searchText);
+
+    history.push(`/${route_parameter}?cusType=${filterText}`);
+
+    //set_filterText("");
   };
 
   useEffect(() => {
@@ -35,28 +55,16 @@ export default function HomePage() {
         <div className="row">
           <div>
             {" "}
-            <button
-              value="Italian"
-              onClick={(e) => set_searchText(e.target.value)}
-            >
+            <button value="Italian" onClick={addQueryurl}>
               Italian
             </button>
-            <button
-              value="French"
-              onClick={(e) => set_searchText(e.target.value)}
-            >
+            <button value="French" onClick={addQueryurl}>
               French
             </button>
-            <button
-              value="Thai"
-              onClick={(e) => set_searchText(e.target.value)}
-            >
+            <button value="Thai" onClick={addQueryurl}>
               Thai
             </button>
-            <button
-              value="Mixed"
-              onClick={(e) => set_searchText(e.target.value)}
-            >
+            <button value="Mixed" onClick={addQueryurl}>
               Mixed
             </button>
           </div>

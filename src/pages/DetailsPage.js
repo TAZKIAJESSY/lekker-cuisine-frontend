@@ -4,7 +4,6 @@ import { useParams } from "react-router-dom";
 import CuisineList from "../components/CuisineList";
 import { selectCuisineDetails } from "../store/cuisineHome/selectors";
 import { fetchcuisineList } from "../store/cuisineHome/actions";
-import { propTypes } from "react-bootstrap/esm/Image";
 
 export default function DetailsPage() {
   const { id } = useParams();

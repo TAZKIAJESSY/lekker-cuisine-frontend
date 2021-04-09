@@ -2,7 +2,9 @@
 //   return reduxState.cuisineHome.cuisines;
 // };
 
-export const selectCuisineHome = (searchText, set_sortBy) => (reduxState) => {
+export const selectCuisineHome = (searchText, filterText, set_sortBy) => (
+  reduxState
+) => {
   let cloneProduct = [...reduxState.cuisineHome.cuisines];
   // console.log(searchText);
 
@@ -10,13 +12,26 @@ export const selectCuisineHome = (searchText, set_sortBy) => (reduxState) => {
     cloneProduct = cloneProduct.filter((c) => {
       return (
         c.title.toUpperCase().includes(searchText.toUpperCase()) ||
-        c.cuisineType.toUpperCase().includes(searchText.toUpperCase()) ||
+        //c.cuisineType.toUpperCase().includes(searchText.toUpperCase()) ||
         //subelement ingredient by name
         c.ingredients.some((i) =>
           i.name.toUpperCase().includes(searchText.toUpperCase())
         )
       );
     });
+
+    if (filterText && filterText !== "") {
+      cloneProduct = cloneProduct.filter((c) => {
+        return (
+          //c.title.toUpperCase().includes(searchText.toUpperCase()) ||
+          c.cuisineType.toUpperCase().includes(filterText.toUpperCase()) // ||
+          //subelement ingredient by name
+          // c.ingredients.some((i) =>
+          //   i.name.toUpperCase().includes(searchText.toUpperCase())
+          // )
+        );
+      });
+    }
 
     console.log("Filterred data: ", cloneProduct);
   }
