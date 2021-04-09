@@ -1,5 +1,6 @@
 import axios from "axios";
 import { apiUrl } from "../../confiig/constants";
+import { selectUser } from "../user/selectors";
 
 export function userFavFetched(favouriteList) {
   return { type: "userFav/userFavFetched", payload: favouriteList };
@@ -7,14 +8,16 @@ export function userFavFetched(favouriteList) {
 
 export async function fetchFavouriteList(dispatch, getState) {
   try {
-    const getFav = getState().userFav.favourites;
+    const { token } = selectUser(getState());
 
-    if (!getFav.length) {
-      const response = await axios.get(`${apiUrl}/favourites`);
-      console.log("All favourites", response);
+    const response = await axios.get(`${apiUrl}/favourites`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    console.log("All favourites", response.data);
 
-      dispatch(userFavFetched(response.data));
-    }
+    dispatch(userFavFetched(response.data));
   } catch (e) {
     console.log(e.message);
   }
