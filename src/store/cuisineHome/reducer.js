@@ -36,7 +36,12 @@ export default function cuisineHomeReducer(state = initialState, action) {
           (c) => c.cuisineId === action.payload.id
         ); //finding index of the item
 
-        newArrayFav[indexFav].cuisine.likes = action.payload.likes;
+        //console.log("Index found: ", indexFav);
+
+        if (indexFav !== -1) {
+          console.log("Index found: ", indexFav);
+          newArrayFav[indexFav].cuisine.likes = action.payload.likes;
+        }
       }
 
       return {
@@ -54,12 +59,12 @@ export default function cuisineHomeReducer(state = initialState, action) {
       return {
         ...state,
         favourites: state.favourites.some(
-          (f) => f.id === action.payload.cuisineId
+          (f) => f.cuisineId === action.payload.cuisineId
         )
           ? state.favourites.filter((fav) => {
               return fav !== action.payload;
             })
-          : [state.favourites, action.payload],
+          : state.favourites.concat(action.payload),
       };
     }
 

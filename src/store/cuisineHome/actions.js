@@ -81,14 +81,19 @@ export const addToFavourites = (cuisineId) => async (dispatch, getState) => {
     },
     { headers: { Authorization: `Bearer ${token}` } }
   );
+
+  console.log("add to fav ", response);
   dispatch(newFavouriteAdded(response.data));
 };
 
-export const deleteFavourite = (id) => async (dispatch, getState) => {
+export const deleteFavourite = (favId) => async (dispatch, getState) => {
   const token = selectToken(getState());
 
-  const response = await axios.delete(`${apiUrl}/favourites/${id}`, {
+  const response = await axios.delete(`${apiUrl}/favourites/${favId}`, {
     headers: { Authorization: `Bearer ${token}` },
   });
-  dispatch(favouriteDeleted(response.data));
+
+  console.log(" del fav ", response);
+
+  dispatch(favouriteDeleted(response.data.findFav));
 };

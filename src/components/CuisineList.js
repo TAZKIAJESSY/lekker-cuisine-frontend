@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
-import { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { selectUserFav } from "../store/cuisineHome/selectors";
+
 import {
   updateCuisineLike,
   addToFavourites,
@@ -9,6 +10,9 @@ import {
 
 export default function CuisineList(props) {
   const dispatch = useDispatch();
+  const favourites = useSelector(selectUserFav);
+
+  // console.log("User fav...", favourites);
 
   const updateLikes = () => {
     // console.log("updating likes for cuisine : ", props.id);
@@ -25,11 +29,19 @@ export default function CuisineList(props) {
 
   const favClicked = (cuisineId, fav) => {
     if (fav) {
-      dispatch(deleteFavourite(fav.props.id));
+      dispatch(deleteFavourite(fav.id));
     } else {
       dispatch(addToFavourites(cuisineId));
     }
   };
+
+  // const checkFav = (cuisineId) => {
+  //   if (favourites.includes(cuisineId)) {
+  //     return "♡";
+  //   } else {
+  //     return "💚";
+  //   }
+  // };
 
   CuisineList.defaultProps = defaultProps;
 
@@ -53,7 +65,10 @@ export default function CuisineList(props) {
           <button
             className="btn btn-basic"
             onClick={() => {
-              favClicked();
+              favClicked(
+                props.id,
+                favourites.find((f) => f.cuisineId === props.id)
+              );
             }}
           >
             💚

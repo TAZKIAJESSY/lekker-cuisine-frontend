@@ -29,19 +29,23 @@ export default function MyFavourite() {
       <div style={{ margin: 200 }}>
         <Carousel className="mt-9" style={{}}>
           {" "}
-          {userFav.map((f, index) => {
-            return (
-              <Carousel.Item key={index} style={{ backgroundColor: "teal" }}>
-                <CuisineList
-                  id={f.cuisine.id}
-                  title={f.cuisine.title}
-                  imageUrl={f.cuisine.imageUrl}
-                  likes={f.cuisine.likes}
-                  cookingTime={f.cuisine.cookingTime}
-                />
-              </Carousel.Item>
-            );
-          })}
+          {userFav && userFav.length !== 0 ? (
+            userFav.map((f, index) => {
+              return (
+                <Carousel.Item key={index} style={{ backgroundColor: "teal" }}>
+                  <CuisineList
+                    id={f?.cuisine.id}
+                    title={f?.cuisine.title}
+                    imageUrl={f?.cuisine.imageUrl}
+                    likes={f?.cuisine.likes}
+                    cookingTime={f?.cuisine.cookingTime}
+                  />
+                </Carousel.Item>
+              );
+            })
+          ) : (
+            <p>Loading....</p>
+          )}
         </Carousel>
       </div>
     </div>

@@ -1,53 +1,55 @@
 import { useState, useEffect } from "react";
-import { Link, useHistory, useParams, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import queryString from "query-string";
 
 import CuisineList from "../../components/CuisineList";
 import { fetchcuisineList } from "../../store/cuisineHome/actions";
 import { selectCuisineHome } from "../../store/cuisineHome/selectors";
+//import { selectUserFav } from "../../store/cuisineHome/selectors";
+import { fetchFavouriteList } from "../../store/cuisineHome/actions";
 
 export default function HomePage() {
-  const history = useHistory();
   const dispatch = useDispatch();
-  const { text } = useParams();
+  const cuisines = useSelector(selectCuisineHome);
 
-  const { search } = useLocation();
-  const { custype } = queryString.parse(search);
-
-  //console.log("Query: ", custype);
-
-  //console.log("what is text", text);
   const [searchText, set_searchText] = useState();
   const [filterText, set_filterText] = useState();
-  const [sortBy, set_sortBy] = useState("");
+  const [sortLikes, setSortLikes] = useState();
+  const [sortCookingTime, setSortCookingTime] = useState();
 
-  const cuisines = useSelector(
-    selectCuisineHome(searchText, filterText, sortBy)
-  );
+  const filteredCuisines = filterText
+    ? cuisines.filter((cuisine) =>
+        cuisine.cuisineType.toUpperCase().includes(filterText.toUpperCase())
+      )
+    : cuisines;
+
+  const searched = searchText
+    ? filteredCuisines.filter((cuisine) =>
+        cuisine.ingredients.some((ingredient) =>
+          ingredient
+            ? ingredient.name.toUpperCase().includes(searchText.toUpperCase())
+            : null
+        )
+      )
+    : filteredCuisines;
+
+  const compareLikes = (a, b) => {
+    return a.likes - b.likes;
+  };
+  const compareCookingTime = (a, b) => {
+    return a.cookingTime - b.cookingTime;
+  };
 
   const addSearchUrl = (e) => {
     e.preventDefault();
-    const route_parameter = encodeURIComponent(searchText);
-
-    history.push(`/${route_parameter}`);
-  };
-
-  const addQueryurl = (e) => {
-    set_filterText(e.target.value);
-
-    //console.log("custype text: ", filterText);
-
-    const route_parameter = encodeURIComponent(searchText);
-
-    history.push(`/${route_parameter}?cusType=${filterText}`);
-
-    //set_filterText("");
   };
 
   useEffect(() => {
     dispatch(fetchcuisineList);
-  }, [dispatch, text]);
+  }, [dispatch]);
+
+  useEffect(() => {
+    dispatch(fetchFavouriteList);
+  }, [dispatch]);
 
   return (
     <div className="container">
@@ -55,29 +57,42 @@ export default function HomePage() {
         <div className="row">
           <div>
             {" "}
-            <button value="Italian" onClick={addQueryurl}>
+            <button
+              value="Italian"
+              onClick={(e) => set_filterText(e.target.value)}
+            >
               Italian
             </button>
-            <button value="French" onClick={addQueryurl}>
+            <button
+              value="French"
+              onClick={(e) => set_filterText(e.target.value)}
+            >
               French
             </button>
-            <button value="Thai" onClick={addQueryurl}>
+            <button
+              value="Thai"
+              onClick={(e) => set_filterText(e.target.value)}
+            >
               Thai
             </button>
-            <button value="Mixed" onClick={addQueryurl}>
+            <button
+              value="Mixed"
+              onClick={(e) => set_filterText(e.target.value)}
+            >
               Mixed
             </button>
           </div>
           <div>
             <label>Sort By:</label>
             <select
-              onChange={(e) => {
-                set_sortBy(e.target.value);
-              }}
+              onChange={(event) =>
+                event.target.value === "Most popular"
+                  ? setSortLikes(searched.sort(compareLikes))
+                  : setSortCookingTime(searched.sort(compareCookingTime))
+              }
             >
-              <option value="sort"></option>
-              <option value="likes">Most Popular ♥ </option>
-              <option value="cookingTime">Cooking Time 🕒 </option>
+              <option value={sortLikes}>Most Popular ♥ </option>
+              <option value={sortCookingTime}>Cooking Time 🕒</option>
             </select>
           </div>
           <div>
@@ -94,8 +109,8 @@ export default function HomePage() {
       </div>{" "}
       <div className="card-container">
         <div className="row">
-          {cuisines && cuisines.length !== 0 ? (
-            cuisines.map((cui, index) => {
+          {searched && searched.length !== 0 ? (
+            searched.map((cui, index) => {
               return (
                 <div className="col-lg-3" key={index}>
                   <CuisineList
