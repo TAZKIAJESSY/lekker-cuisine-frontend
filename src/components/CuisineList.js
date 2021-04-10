@@ -1,7 +1,11 @@
 import { Link } from "react-router-dom";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { updateCuisineLike } from "../store/cuisineHome/actions";
+import {
+  updateCuisineLike,
+  addToFavourites,
+  deleteFavourite,
+} from "../store/cuisineHome/actions";
 
 export default function CuisineList(props) {
   const dispatch = useDispatch();
@@ -18,6 +22,14 @@ export default function CuisineList(props) {
   // const propTypes = {
   //   servings: PropTypes.bool.isRequired,
   // };
+
+  const favClicked = (cuisineId, fav) => {
+    if (fav) {
+      dispatch(deleteFavourite(fav.props.id));
+    } else {
+      dispatch(addToFavourites(cuisineId));
+    }
+  };
 
   CuisineList.defaultProps = defaultProps;
 
@@ -38,10 +50,16 @@ export default function CuisineList(props) {
           ></img>
         </Link>
         <div style={{ marginTop: 10, marginBottom: 10 }}>
-          <button className="btn btn-basic">💚</button>
           <button
             className="btn btn-basic"
-            value="likes"
+            onClick={() => {
+              favClicked();
+            }}
+          >
+            💚
+          </button>
+          <button
+            className="btn btn-basic"
             onClick={() => {
               updateLikes();
             }}

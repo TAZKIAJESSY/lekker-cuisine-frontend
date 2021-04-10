@@ -19,6 +19,7 @@ export default function cuisineHomeReducer(state = initialState, action) {
 
       // console.log("id to update: ", action.payload);
       if (newArray && newArray.length !== 0) {
+        //to avode getting undefined
         const index = state.cuisines.findIndex(
           (c) => c.id === action.payload.id
         ); //finding index of the item
@@ -45,8 +46,30 @@ export default function cuisineHomeReducer(state = initialState, action) {
       };
     }
 
-    case "userFav/userFavFetched": {
+    case "cuisineHome/userFavFetched": {
       return { ...state, favourites: [...action.payload] };
+    }
+
+    case "cuisineHome/newFavouriteAdded": {
+      return {
+        ...state,
+        favourites: state.favourites.some(
+          (f) => f.id === action.payload.cuisineId
+        )
+          ? state.favourites.filter((fav) => {
+              return fav !== action.payload;
+            })
+          : [state.favourites, action.payload],
+      };
+    }
+
+    case "cuisineHome/favouriteDeleted": {
+      const FavId = action.payload.id;
+      const newFavs = state.favourites.filter((f) => f.id !== FavId);
+      return {
+        ...state,
+        favourites: newFavs,
+      };
     }
 
     default: {

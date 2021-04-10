@@ -10,7 +10,7 @@ import { fetchFavouriteList } from "../store/cuisineHome/actions";
 export default function MyFavourite() {
   const dispatch = useDispatch();
   const user = useSelector(selectUser);
-  const fav = useSelector(selectUserFav);
+  const userFav = useSelector(selectUserFav);
 
   useEffect(() => {
     dispatch(fetchFavouriteList);
@@ -29,7 +29,7 @@ export default function MyFavourite() {
       <div style={{ margin: 200 }}>
         <Carousel className="mt-9" style={{}}>
           {" "}
-          {fav.map((f, index) => {
+          {userFav.map((f, index) => {
             return (
               <Carousel.Item key={index} style={{ backgroundColor: "teal" }}>
                 <CuisineList
