@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { selectUserFav } from "../store/cuisineHome/selectors";
+import { selectUser } from "../store/user/selectors";
 
 import {
   updateCuisineLike,
@@ -10,6 +11,7 @@ import {
 
 export default function CuisineList(props) {
   const dispatch = useDispatch();
+  const user = useSelector(selectUser);
   const favourites = useSelector(selectUserFav);
 
   // console.log("User fav...", favourites);
@@ -99,6 +101,8 @@ export default function CuisineList(props) {
             <b>Instructions:</b> {props.instructions}{" "}
           </p>
         ) : null}
+
+        {/* <div>{user.firstName} 🧑🏼</div> */}
       </div>
     </div>
   );
