@@ -94,22 +94,26 @@ export default function HomePage() {
       </div>{" "}
       <div className="card-container">
         <div className="row">
-          {cuisines.map((cui, index) => {
-            return (
-              <div className="col-lg-3" key={index}>
-                <CuisineList
-                  id={cui.id}
-                  title={cui.title}
-                  imageUrl={cui.imageUrl}
-                  likes={cui.likes}
-                  cookingTime={cui.cookingTime}
-                  // servings={false}
-                  // instructions={false}
-                  // calories={false}
-                />
-              </div>
-            );
-          })}{" "}
+          {cuisines && cuisines.length !== 0 ? (
+            cuisines.map((cui, index) => {
+              return (
+                <div className="col-lg-3" key={index}>
+                  <CuisineList
+                    id={cui.id}
+                    title={cui.title}
+                    imageUrl={cui.imageUrl}
+                    likes={cui.likes}
+                    cookingTime={cui.cookingTime}
+                    // servings={false}
+                    // instructions={false}
+                    // calories={false}
+                  />
+                </div>
+              );
+            })
+          ) : (
+            <p>No cuisine found...</p>
+          )}
         </div>
       </div>
     </div>

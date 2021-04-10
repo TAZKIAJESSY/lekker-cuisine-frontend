@@ -1,15 +1,15 @@
 import { Link } from "react-router-dom";
+import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { updateCuisineLike } from "../store/cuisineHome/actions";
 
 export default function CuisineList(props) {
   const dispatch = useDispatch();
 
-  const updateLikes = () => {
-    // console.log("updating likes for cuisine : ", props.id);
-    dispatch(updateCuisineLike(props.id));
-  };
-
+  // const updateLikes = () => {
+  //   // console.log("updating likes for cuisine : ", props.id);
+  //   dispatch(updateCuisineLike(props.id));
+  // };
   const defaultProps = {
     servings: false,
     calories: false,
@@ -42,7 +42,7 @@ export default function CuisineList(props) {
           <button
             className="btn btn-basic"
             onClick={() => {
-              updateLikes();
+              dispatch(updateCuisineLike(props.id));
             }}
           >
             👍

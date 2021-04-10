@@ -19,9 +19,12 @@ export default function MyFavourite() {
   return (
     <div>
       <div style={{ marginTop: 50, marginBottom: 50 }}>
-        <b style={{ color: "teal" }}>{user.firstName}'s</b> Kitchen
+        <b style={{ color: "teal", fontSize: 20 }}>{user.firstName}'s</b>{" "}
+        Kitchen
       </div>
-      <div>Carousel for your fav cuisines... Hurray!!! </div>
+      <div style={{ fontSize: 20 }}>
+        Carousel for your fav cuisines... Hurray!!!{" "}
+      </div>
 
       <div style={{ margin: 200 }}>
         <Carousel className="mt-9" style={{}}>
