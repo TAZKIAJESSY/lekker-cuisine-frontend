@@ -26,7 +26,7 @@ export default function Navigation() {
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav style={{ width: "100%", height: 200, padding: 50 }} fill>
-          <NavbarItem path="/:text?" linkText="Cuisine" />
+          <NavbarItem path="/" linkText="Cuisine" />
           <NavbarItem path="/favourite" linkText="My 🖤 Favourite" />
           {loginLogoutControls}
         </Nav>
