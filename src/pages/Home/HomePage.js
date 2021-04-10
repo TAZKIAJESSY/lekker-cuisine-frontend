@@ -17,7 +17,7 @@ export default function HomePage() {
 
   //console.log("Query: ", custype);
 
-  console.log("what is text", text);
+  //console.log("what is text", text);
   const [searchText, set_searchText] = useState();
   const [filterText, set_filterText] = useState();
   const [sortBy, set_sortBy] = useState("");
@@ -36,7 +36,7 @@ export default function HomePage() {
   const addQueryurl = (e) => {
     set_filterText(e.target.value);
 
-    console.log("custype text: ", filterText);
+    //console.log("custype text: ", filterText);
 
     const route_parameter = encodeURIComponent(searchText);
 

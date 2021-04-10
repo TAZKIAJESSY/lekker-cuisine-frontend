@@ -6,10 +6,10 @@ import { updateCuisineLike } from "../store/cuisineHome/actions";
 export default function CuisineList(props) {
   const dispatch = useDispatch();
 
-  // const updateLikes = () => {
-  //   // console.log("updating likes for cuisine : ", props.id);
-  //   dispatch(updateCuisineLike(props.id));
-  // };
+  const updateLikes = () => {
+    // console.log("updating likes for cuisine : ", props.id);
+    dispatch(updateCuisineLike(props.id));
+  };
   const defaultProps = {
     servings: false,
     calories: false,
@@ -41,8 +41,9 @@ export default function CuisineList(props) {
           <button className="btn btn-basic">💚</button>
           <button
             className="btn btn-basic"
+            value="likes"
             onClick={() => {
-              dispatch(updateCuisineLike(props.id));
+              updateLikes();
             }}
           >
             👍

@@ -6,8 +6,8 @@ export function allCuisineFetched(cuisineList) {
   return { type: "cuisineHome/allCuisineFetched", payload: cuisineList };
 }
 
-export function cuisineLiked(datacuisine) {
-  return { type: "cuisineHome/cuisineLiked", payload: datacuisine };
+export function cuisineLiked(cuisine) {
+  return { type: "cuisineHome/cuisineLiked", payload: cuisine };
 }
 
 export async function fetchcuisineList(dispatch, getState) {
@@ -25,16 +25,16 @@ export async function fetchcuisineList(dispatch, getState) {
   }
 }
 
-export const addCuisineLike = (id) => async (dispatch, getState) => {
+export const updateCuisineLike = (id) => async (dispatch, getState) => {
+  // const { token } = selectUser(getState());
+
+  //console.log("token", token);
   try {
-    const getCuisine = getState().cuisineHome.cuisines;
-    if (!getCuisine.length) {
-      const response = await axios.patch(`${apiUrl}/cuisines/like/${id}`);
+    const response = await axios.patch(`${apiUrl}/cuisines/likes/${id}`);
 
-      console.log(response);
+    console.log("Cuisine updare response: ", response.data);
 
-      dispatch(cuisineLiked(response.data));
-    }
+    dispatch(cuisineLiked(response.data));
   } catch (e) {
     console.log(e.message);
   }
