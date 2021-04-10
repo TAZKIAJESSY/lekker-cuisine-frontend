@@ -13,13 +13,6 @@ export default function cuisineHomeReducer(state = initialState, action) {
       };
     }
 
-    // case "cuisineHome/cuisineLiked": {
-    //   return {
-    //     ...state,
-    //     cuisines: { ...state.cuisines, likes: state.cuisines.likes + 1 },
-    //   };
-    // }
-
     case "cuisineHome/cuisineLiked": {
       //for cuisine
       const newArray = [...state.cuisines]; //making a new array
