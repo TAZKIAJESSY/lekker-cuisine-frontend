@@ -2,6 +2,9 @@ import Form from "react-bootstrap/Form";
 import Container from "react-bootstrap/Container";
 import Button from "react-bootstrap/Button";
 import { Col, Row } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
+
+import { selectUser } from "../../store/user/selectors";
 
 export default function AddCuisineForm() {
   return (
