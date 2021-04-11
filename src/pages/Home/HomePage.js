@@ -135,8 +135,8 @@ export default function HomePage() {
               onChange={change_sorting}
             >
               <option value="">Select an option</option>
-              <option value="Most Popular">Most Popular</option>
-              <option value="Cooking Time">Cooking Time</option>
+              <option value="Most Popular">Most Popular ♡ </option>
+              <option value="Cooking Time">Cooking Time 🕒 </option>
             </select>
           </div>
           <div className="form-deco">
