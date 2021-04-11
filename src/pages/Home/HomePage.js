@@ -3,46 +3,60 @@ import { useDispatch, useSelector } from "react-redux";
 
 import "./HomePage.css";
 import CuisineList from "../../components/CuisineList";
-import { fetchcuisineList } from "../../store/cuisineHome/actions";
+import {
+  fetchcuisineList,
+  fetchFavouriteList,
+} from "../../store/cuisineHome/actions";
 import { selectCuisineHome } from "../../store/cuisineHome/selectors";
 //import { selectUserFav } from "../../store/cuisineHome/selectors";
-import { fetchFavouriteList } from "../../store/cuisineHome/actions";
-
-const compareLikes = (a, b) => {
-  return a.likes - b.likes;
-};
-const compareCookingTime = (a, b) => {
-  return a.cookingTime - b.cookingTime;
-};
 
 export default function HomePage() {
   const dispatch = useDispatch();
   const cuisines = useSelector(selectCuisineHome);
+  const cloneCuisines = [...cuisines];
 
   const [searchText, set_searchText] = useState();
   const [filterText, set_filterText] = useState();
-  const [sortLikes, setSortLikes] = useState();
-  const [sortCookingTime, setSortCookingTime] = useState();
-
-  const filteredCuisines = filterText
-    ? cuisines.filter((cuisine) =>
-        cuisine.cuisineType.toUpperCase().includes(filterText.toUpperCase())
-      )
-    : cuisines;
-
-  const searched = searchText
-    ? filteredCuisines.filter((cuisine) =>
-        cuisine.ingredients.some((ingredient) =>
-          ingredient
-            ? ingredient.name.toUpperCase().includes(searchText.toUpperCase())
-            : null
-        )
-      )
-    : filteredCuisines;
+  const [sortText, set_sortText] = useState();
 
   const addSearchUrl = (e) => {
     e.preventDefault();
   };
+
+  const compareLikes = (a, b) => {
+    return b.likes - a.likes;
+  };
+  const compareCookingTime = (a, b) => {
+    return a.cookingTime - b.cookingTime;
+  };
+
+  function change_sorting(event) {
+    console.log("New filter sort", event.target.value);
+    set_sortText(event.target.value);
+  }
+
+  const filteredCuisines = filterText
+    ? cloneCuisines.filter(
+        (cuisine) =>
+          cuisine.cuisineType.toUpperCase().includes(filterText.toUpperCase()) // button (cuisine type)
+      )
+    : cloneCuisines;
+
+  const searched = searchText
+    ? filteredCuisines.filter(
+        (cuisine) =>
+          cuisine.ingredients.some((ingredient) =>
+            ingredient
+              ? ingredient.name.toUpperCase().includes(searchText.toUpperCase()) //ingredient name
+              : null
+          ) || cuisine.title.toUpperCase().includes(searchText.toUpperCase()) //cuisine name
+      )
+    : filteredCuisines;
+
+  const cuisines_sorted =
+    sortText === "Most Popular"
+      ? [...searched].sort(compareLikes)
+      : [...searched].sort(compareCookingTime);
 
   useEffect(() => {
     dispatch(fetchcuisineList);
@@ -113,25 +127,23 @@ export default function HomePage() {
           </div>
           <div className="sort-deco">
             <label>
-              {" "}
-              <b>Sort By: </b>
-            </label>
+              <b> Sort By: </b>
+            </label>{" "}
             <select
+              style={{ width: 200, height: 30 }}
               placeholder="Sort"
-              onChange={(e) =>
-                e.target.value === "Most Popular ♥ "
-                  ? setSortLikes(searched.sort(compareLikes))
-                  : setSortCookingTime(searched.sort(compareCookingTime))
-              }
+              onChange={change_sorting}
             >
-              <option value={sortLikes}>Most Popular ♥ </option>
-              <option value={sortCookingTime}>Cooking Time 🕒</option>
+              <option value="">Select an option</option>
+              <option value="Most Popular">Most Popular</option>
+              <option value="Cooking Time">Cooking Time</option>
             </select>
           </div>
           <div className="form-deco">
             {" "}
             <form onSubmit={addSearchUrl}>
               <input
+                style={{ width: 200, height: 35 }}
                 type={searchText}
                 onChange={(e) => set_searchText(e.target.value)}
                 placeholder="Search..."
@@ -142,8 +154,8 @@ export default function HomePage() {
       </div>{" "}
       <div className="card-container">
         <div className="row">
-          {searched && searched.length !== 0 ? (
-            searched.map((cui, index) => {
+          {cuisines_sorted && cuisines_sorted.length !== 0 ? (
+            cuisines_sorted.map((cui, index) => {
               return (
                 <div className="col-lg-3" key={index}>
                   <CuisineList
