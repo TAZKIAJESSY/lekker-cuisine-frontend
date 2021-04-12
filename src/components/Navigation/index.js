@@ -29,6 +29,7 @@ export default function Navigation() {
           <NavbarItem path="/" linkText="Cuisine" />
           <NavbarItem path="/favourite" linkText="My 🖤 Favourite" />
           <NavbarItem path="/addcuisine" linkText="Add Cuisine 🍂" />
+          <NavbarItem path="/shopping" linkText="Shopping List 📝" />
 
           {loginLogoutControls}
         </Nav>
