@@ -13,7 +13,7 @@ export default function DetailsPage() {
 
   const cuisineDetails = useSelector(selectCuisineDetails);
 
-  console.log("what is cuisine:", cuisineDetails);
+  //console.log("what is cuisine:", cuisineDetails);
 
   useEffect(() => {
     dispatch(showDetails(id));
@@ -32,7 +32,7 @@ export default function DetailsPage() {
       <div className="details-show">
         <div className="row">
           <div className="col-lg-12">
-            {cuisineDetails && cuisineDetails.length !== 0 ? (
+            {cuisineDetails ? (
               <CuisineList
                 id={cuisineDetails.id}
                 title={cuisineDetails.title}
