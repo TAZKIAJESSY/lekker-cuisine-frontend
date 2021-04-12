@@ -98,11 +98,20 @@ export default function CuisineList(props) {
           </p>
         ) : null}
         {props.ingredients ? (
-          <ul>
+          <ol style={{ listStyleType: "square", listStylePosition: "inside" }}>
+            <b> Ingredient List: </b>
             {props.ingredients.map((ing, index) => {
-              return <li>{ing.name}</li>;
+              return (
+                <li key={index}>
+                  {ing.name}{" "}
+                  <button style={{ marginLeft: 60 }}>Add to shopping </button>
+                  <ul style={{ listStyleType: "none" }}>
+                    <li style={{ marginRight: 180 }}>{ing.amount}</li>
+                  </ul>
+                </li>
+              );
             })}
-          </ul>
+          </ol>
         ) : null}
 
         {/* <div>{user.firstName} 🧑🏼</div> */}

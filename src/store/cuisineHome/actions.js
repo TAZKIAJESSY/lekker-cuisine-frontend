@@ -6,6 +6,10 @@ export function allCuisineFetched(cuisineList) {
   return { type: "cuisineHome/allCuisineFetched", payload: cuisineList };
 }
 
+export function detailsForCuisine(id) {
+  return { type: "cuisineHome/detailsForCuisine", payload: id };
+}
+
 export function cuisineLiked(cuisine) {
   return { type: "cuisineHome/cuisineLiked", payload: cuisine };
 }
@@ -41,6 +45,19 @@ export async function fetchcuisineList(dispatch, getState) {
     console.log(e.message);
   }
 }
+
+//details for a cuisine
+
+export const showDetails = (id) => async (dispatch, getState) => {
+  try {
+    const response = await axios.get(`${apiUrl}/cuisines/${id}`);
+    console.log("cuisine details: ", response);
+
+    dispatch(detailsForCuisine(response.data));
+  } catch (e) {
+    console.log(e.message);
+  }
+};
 
 //update likes for cuisines
 export const updateCuisineLike = (id) => async (dispatch, getState) => {

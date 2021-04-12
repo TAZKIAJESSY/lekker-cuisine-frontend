@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import CuisineList from "../components/CuisineList";
 import { selectCuisineDetails } from "../store/cuisineHome/selectors";
-import { fetchcuisineList } from "../store/cuisineHome/actions";
+import { showDetails } from "../store/cuisineHome/actions";
 
 export default function DetailsPage() {
   const { id } = useParams();
@@ -11,13 +11,13 @@ export default function DetailsPage() {
 
   console.log("Search with cuisineId: ", id);
 
-  const cuisine = useSelector(selectCuisineDetails(id));
+  const cuisineDetails = useSelector(selectCuisineDetails);
 
-  console.log("what is cuisine:", cuisine);
+  console.log("what is cuisine:", cuisineDetails);
 
   useEffect(() => {
-    dispatch(fetchcuisineList);
-  }, [dispatch]);
+    dispatch(showDetails(id));
+  }, [dispatch, id]);
 
   return (
     <div className="container">
@@ -32,17 +32,21 @@ export default function DetailsPage() {
       <div className="details-show">
         <div className="row">
           <div className="col-lg-12">
-            <CuisineList
-              id={cuisine?.id}
-              title={cuisine?.title}
-              imageUrl={cuisine?.imageUrl}
-              likes={cuisine?.likes}
-              cookingTime={cuisine?.cookingTime}
-              instructions={cuisine?.instructions}
-              servings={cuisine?.servings}
-              calories={cuisine?.calories}
-              ingredients={cuisine?.ingredients.name}
-            />{" "}
+            {cuisineDetails && cuisineDetails.length !== 0 ? (
+              <CuisineList
+                id={cuisineDetails.id}
+                title={cuisineDetails.title}
+                imageUrl={cuisineDetails.imageUrl}
+                likes={cuisineDetails.likes}
+                cookingTime={cuisineDetails.cookingTime}
+                instructions={cuisineDetails.instructions}
+                servings={cuisineDetails.servings}
+                calories={cuisineDetails.calories}
+                ingredients={cuisineDetails.ingredients}
+              />
+            ) : (
+              <p>No details found</p>
+            )}
           </div>
         </div>
       </div>
