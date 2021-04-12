@@ -1,4 +1,3 @@
-import { getByTitle } from "@testing-library/dom";
 import axios from "axios";
 import { apiUrl } from "../../confiig/constants";
 import { selectUser, selectToken } from "../user/selectors";
@@ -117,10 +116,13 @@ export const addCuisine = ({
   servings,
   cookingTime,
   calories,
+  user,
   inputIngredients,
 }) => async (dispatch, getState) => {
   try {
+    const id = parseInt(user.id);
     const token = selectToken(getState());
+    console.log("valiessd ", title, instructions);
     const response = await axios.post(
       `${apiUrl}/cuisines`,
       {
@@ -132,6 +134,7 @@ export const addCuisine = ({
         cookingTime: cookingTime,
         calories: calories,
         ingredients: inputIngredients,
+        userId: id,
       },
       { headers: { Authorization: `Bearer ${token}` } }
     );
