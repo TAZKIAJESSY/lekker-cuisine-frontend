@@ -22,6 +22,11 @@ export function favouriteDeleted(id) {
   return { type: "cuisineHome/favouriteDeleted", payload: id };
 }
 
+export function cuisineAdded(addedData) {
+  return { type: "cuisineHome/cuisineAdded", payload: addedData };
+}
+
+//fetch all cuisines for homepage
 export async function fetchcuisineList(dispatch, getState) {
   try {
     const getCuisine = getState().cuisineHome.cuisines;
@@ -37,6 +42,7 @@ export async function fetchcuisineList(dispatch, getState) {
   }
 }
 
+//update likes for cuisines
 export const updateCuisineLike = (id) => async (dispatch, getState) => {
   // const { token } = selectUser(getState());
 
@@ -52,6 +58,7 @@ export const updateCuisineLike = (id) => async (dispatch, getState) => {
   }
 };
 
+//get all favourite for a user
 export async function fetchFavouriteList(dispatch, getState) {
   try {
     const { token } = selectUser(getState());
@@ -69,6 +76,7 @@ export async function fetchFavouriteList(dispatch, getState) {
   }
 }
 
+//create new fav for a user
 export const addToFavourites = (cuisineId) => async (dispatch, getState) => {
   const token = selectToken(getState());
   const user = selectUser(getState());
@@ -86,6 +94,7 @@ export const addToFavourites = (cuisineId) => async (dispatch, getState) => {
   dispatch(newFavouriteAdded(response.data));
 };
 
+//del fav from fav list
 export const deleteFavourite = (favId) => async (dispatch, getState) => {
   const token = selectToken(getState());
 
@@ -96,4 +105,44 @@ export const deleteFavourite = (favId) => async (dispatch, getState) => {
   console.log(" del fav ", response);
 
   dispatch(favouriteDeleted(response.data.findFav));
+};
+
+//add new cuisine
+export const addCuisine = ({
+  title,
+  instructions,
+  imageUrl,
+  cuisineType,
+  servings,
+  cookingTime,
+  calories,
+  user,
+  inputIngredients,
+}) => async (dispatch, getState) => {
+  try {
+    const id = parseInt(user.id);
+    const token = selectToken(getState());
+    console.log("valiessd ", title, instructions);
+    const response = await axios.post(
+      `${apiUrl}/cuisines`,
+      {
+        title: title,
+        instructions: instructions,
+        imageUrl: imageUrl,
+        cuisineType: cuisineType,
+        servings: servings,
+        cookingTime: cookingTime,
+        calories: calories,
+        ingredients: inputIngredients,
+        userId: id,
+      },
+      { headers: { Authorization: `Bearer ${token}` } }
+    );
+
+    console.log(" Add new cuisine ", response);
+
+    dispatch(cuisineAdded(response.data));
+  } catch (e) {
+    console.log(e.message);
+  }
 };

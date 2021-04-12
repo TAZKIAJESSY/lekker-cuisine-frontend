@@ -41,6 +41,7 @@ export default function DetailsPage() {
               instructions={cuisine?.instructions}
               servings={cuisine?.servings}
               calories={cuisine?.calories}
+              ingredients={cuisine?.ingredients.name}
             />{" "}
           </div>
         </div>

@@ -14,6 +14,7 @@ import { selectAppLoading } from "./store/appState/selectors";
 import { getUserWithStoredToken } from "./store/user/actions";
 import DetailsPage from "./pages/DetailsPage";
 import MyFavourite from "./pages/My Favourite";
+import AddCuisineForm from "./pages/AddCuisine/AddCuisineForm";
 
 function App() {
   const dispatch = useDispatch();
@@ -35,6 +36,7 @@ function App() {
         <Route path="/login" component={Login} />
         <Route path="/details/:id" component={DetailsPage} />
         <Route path="/favourite" component={MyFavourite} />
+        <Route path="/addcuisine" component={AddCuisineForm} />
       </Switch>
     </div>
   );

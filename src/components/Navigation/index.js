@@ -28,6 +28,8 @@ export default function Navigation() {
         <Nav style={{ width: "100%", height: 200, padding: 50 }} fill>
           <NavbarItem path="/" linkText="Cuisine" />
           <NavbarItem path="/favourite" linkText="My 🖤 Favourite" />
+          <NavbarItem path="/addcuisine" linkText="Add Cuisine 🍂" />
+
           {loginLogoutControls}
         </Nav>
       </Navbar.Collapse>
