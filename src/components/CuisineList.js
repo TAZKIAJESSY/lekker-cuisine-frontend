@@ -102,7 +102,7 @@ export default function CuisineList(props) {
             <b> Ingredient List: </b>
             {props.ingredients.map((ing, index) => {
               return (
-                <li>
+                <li key={index}>
                   {ing.name}{" "}
                   <button style={{ marginLeft: 60 }}>Add to shopping </button>
                   <ul style={{ listStyleType: "none" }}>

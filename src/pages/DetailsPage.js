@@ -44,7 +44,9 @@ export default function DetailsPage() {
                 calories={cuisineDetails.calories}
                 ingredients={cuisineDetails.ingredients}
               />
-            ) : null}
+            ) : (
+              <p>No details found</p>
+            )}
           </div>
         </div>
       </div>
