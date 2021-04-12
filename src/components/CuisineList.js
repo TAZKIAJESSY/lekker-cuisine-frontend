@@ -103,9 +103,10 @@ export default function CuisineList(props) {
             {props.ingredients.map((ing, index) => {
               return (
                 <li>
-                  {ing.name}
+                  {ing.name}{" "}
+                  <button style={{ marginLeft: 60 }}>Add to shopping </button>
                   <ul style={{ listStyleType: "none" }}>
-                    <li>{ing.amount}</li>
+                    <li style={{ marginRight: 180 }}>{ing.amount}</li>
                   </ul>
                 </li>
               );
