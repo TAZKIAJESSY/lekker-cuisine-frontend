@@ -9,14 +9,18 @@ export function shoppingListFetched(listData) {
 //fetch all list for shoppingListpage
 export async function fetchShoppingList(dispatch, getState) {
   try {
-    const getCuisine = getState().shoppingList.lists;
+    const { token } = selectUser(getState());
 
-    if (!getCuisine.length) {
-      const response = await axios.get(`${apiUrl}/lists`);
-      console.log("All ingredient lists to shop", response);
+    // const getCuisine = getState().shoppingList.lists;
 
-      dispatch(shoppingListFetched(response.data));
-    }
+    const response = await axios.get(`${apiUrl}/lists`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    console.log("All ingredient lists to shop", response);
+
+    dispatch(shoppingListFetched(response.data));
   } catch (e) {
     console.log(e.message);
   }

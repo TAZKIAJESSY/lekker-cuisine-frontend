@@ -2,10 +2,7 @@ const initialState = {
   lists: null,
 };
 
-export const shoppingListReducer = () => async (
-  state = initialState,
-  action
-) => {
+export default function shoppingListReducer(state = initialState, action) {
   switch (action.type) {
     case "shoppingList/shoppingListFetched": {
       return {
@@ -17,4 +14,4 @@ export const shoppingListReducer = () => async (
       return state;
     }
   }
-};
+}
