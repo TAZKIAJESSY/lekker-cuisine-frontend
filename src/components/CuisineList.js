@@ -85,21 +85,24 @@ export default function CuisineList(props) {
           </button>
           <span>{props.likes}</span>{" "}
         </div>
-
         <p className="card-text">{props.cookingTime} min</p>
-
         {props.servings ? (
           <p className="card-text">Servings: {props.servings} </p>
         ) : null}
-
         {props.calories ? (
           <p className="card-text">Calorie per serving: {props.calories} </p>
         ) : null}
-
         {props.instructions ? (
           <p className="card-text">
             <b>Instructions:</b> {props.instructions}{" "}
           </p>
+        ) : null}
+        {props.ingredients ? (
+          <ul>
+            {props.ingredients.map((ing, index) => {
+              return <li>{ing.name}</li>;
+            })}
+          </ul>
         ) : null}
 
         {/* <div>{user.firstName} 🧑🏼</div> */}

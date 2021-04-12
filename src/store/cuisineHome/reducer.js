@@ -77,12 +77,12 @@ export default function cuisineHomeReducer(state = initialState, action) {
       };
     }
 
-    case "cuisineHome/cuisineAdded": {
-      return {
-        ...state,
-        cuisines: [state.cuisines, action.payload],
-      };
-    }
+    // case "cuisineHome/cuisineAdded": {
+    //   return {
+    //     ...state,
+    //     cuisines: [state.cuisines, action.payload],
+    //   };
+    // }
 
     default: {
       return state;
