@@ -26,9 +26,9 @@ export function favouriteDeleted(id) {
   return { type: "cuisineHome/favouriteDeleted", payload: id };
 }
 
-export function cuisineAdded(addedData) {
-  return { type: "cuisineHome/cuisineAdded", payload: addedData };
-}
+// export function cuisineAdded(addedData) {
+//   return { type: "cuisineHome/cuisineAdded", payload: addedData };
+// }
 
 //fetch all cuisines for homepage
 export async function fetchcuisineList(dispatch, getState) {
@@ -158,7 +158,7 @@ export const addCuisine = ({
 
     console.log(" Add new cuisine ", response);
 
-    dispatch(cuisineAdded(response.data));
+    // dispatch(cuisineAdded(response.data));
   } catch (e) {
     console.log(e.message);
   }

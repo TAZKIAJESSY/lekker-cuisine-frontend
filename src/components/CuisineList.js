@@ -71,6 +71,7 @@ export default function CuisineList(props) {
           <button
             className="btn btn-basic"
             onClick={() => {
+              //fav button
               favClicked(
                 props.id,
                 favourites.find((f) => f.cuisineId === props.id)
@@ -82,6 +83,7 @@ export default function CuisineList(props) {
           <button
             className="btn btn-basic"
             onClick={() => {
+              //like button
               updateLikes();
             }}
           >
@@ -110,6 +112,7 @@ export default function CuisineList(props) {
                   {ing.name} {ing.id}
                   <button
                     onClick={() => {
+                      //details page ingredient button
                       addList(ing.id);
                     }}
                     style={{ marginLeft: 60 }}

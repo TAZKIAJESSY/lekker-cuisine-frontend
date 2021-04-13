@@ -52,3 +52,16 @@ export const fetchAdded = (ingredientId) => async (dispatch, getState) => {
     console.log(e.message);
   }
 };
+
+//del ingredient from shopping list
+export const removeIngredient = (id) => async (dispatch, getState) => {
+  const token = selectToken(getState());
+
+  const response = await axios.delete(`${apiUrl}/lists/${id}`, {
+    headers: { Authorization: `Bearer ${token}` },
+  });
+
+  console.log(" Remove from your list ", response);
+
+  // dispatch(favouriteDeleted(response.data.findFav));
+};

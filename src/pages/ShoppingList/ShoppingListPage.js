@@ -2,7 +2,10 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { selectShoppingList } from "../../store/shoppingList/selectors";
-import { fetchShoppingList } from "../../store/shoppingList/actions";
+import {
+  fetchShoppingList,
+  removeIngredient,
+} from "../../store/shoppingList/actions";
 
 export default function ShoppingListPage() {
   const dispatch = useDispatch();
@@ -33,7 +36,15 @@ export default function ShoppingListPage() {
                     <li>
                       {" "}
                       {c.ingredient.name}{" "}
-                      <button style={{ marginLeft: 70 }}>Remove</button>
+                      <button
+                        onClick={() => {
+                          //remove ingredient button
+                          dispatch(removeIngredient(c.id));
+                        }}
+                        style={{ marginLeft: 70 }}
+                      >
+                        Remove
+                      </button>
                     </li>
                   </ul>
                 );
