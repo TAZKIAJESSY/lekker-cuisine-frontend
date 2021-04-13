@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { selectUserFav } from "../store/cuisineHome/selectors";
 import { selectUser } from "../store/user/selectors";
+import { fetchAdded } from "../store/shoppingList/actions";
 
 import {
   updateCuisineLike,
@@ -20,14 +21,17 @@ export default function CuisineList(props) {
     // console.log("updating likes for cuisine : ", props.id);
     dispatch(updateCuisineLike(props.id));
   };
+
+  const addList = (ingredientId) => {
+    console.log("add ingredientId: ", ingredientId);
+    dispatch(fetchAdded(ingredientId));
+  };
+
   const defaultProps = {
     servings: false,
     calories: false,
     instructions: false,
   };
-  // const propTypes = {
-  //   servings: PropTypes.bool.isRequired,
-  // };
 
   const favClicked = (cuisineId, fav) => {
     if (fav) {
@@ -103,8 +107,15 @@ export default function CuisineList(props) {
             {props.ingredients.map((ing, index) => {
               return (
                 <li key={index}>
-                  {ing.name}{" "}
-                  <button style={{ marginLeft: 60 }}>Add to shopping </button>
+                  {ing.name} {ing.id}
+                  <button
+                    onClick={() => {
+                      addList(ing.id);
+                    }}
+                    style={{ marginLeft: 60 }}
+                  >
+                    Add to shopping{" "}
+                  </button>
                   <ul style={{ listStyleType: "none" }}>
                     <li style={{ marginRight: 180 }}>{ing.amount}</li>
                   </ul>

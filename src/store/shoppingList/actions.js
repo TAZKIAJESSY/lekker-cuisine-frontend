@@ -6,6 +6,10 @@ export function shoppingListFetched(listData) {
   return { type: "shoppingList/shoppingListFetched", payload: listData };
 }
 
+// export function addedToShop(data) {
+//   return { type: "shoppingList/addedToShop", payload: data };
+// }
+
 //fetch all list for shoppingListpage
 export async function fetchShoppingList(dispatch, getState) {
   try {
@@ -25,3 +29,26 @@ export async function fetchShoppingList(dispatch, getState) {
     console.log(e.message);
   }
 }
+
+//add a ingredient from details page to shoppinglist page
+export const fetchAdded = (ingredientId) => async (dispatch, getState) => {
+  console.log("ingredientId: ", ingredientId);
+  try {
+    const { token } = selectUser(getState());
+
+    const response = await axios.post(
+      `${apiUrl}/lists`,
+      { ingredientId: ingredientId },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    console.log("Add ingredient from details page to shop", response);
+
+    //dispatch((response.data));
+  } catch (e) {
+    console.log(e.message);
+  }
+};

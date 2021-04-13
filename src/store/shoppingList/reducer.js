@@ -10,6 +10,10 @@ export default function shoppingListReducer(state = initialState, action) {
       };
     }
 
+    case "shoppingList/addedToShop": {
+      return {};
+    }
+
     default: {
       return state;
     }
