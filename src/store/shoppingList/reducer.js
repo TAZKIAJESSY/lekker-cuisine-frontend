@@ -10,6 +10,17 @@ export default function shoppingListReducer(state = initialState, action) {
       };
     }
 
+    case "shoppingList/removedIngredient": {
+      const id = parseInt(action.payload.id);
+
+      const newList = state.lists.filter((oneItem) => oneItem.id !== id);
+
+      return {
+        ...state,
+        lists: newList,
+      };
+    }
+
     default: {
       return state;
     }

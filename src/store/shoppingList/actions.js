@@ -6,9 +6,9 @@ export function shoppingListFetched(listData) {
   return { type: "shoppingList/shoppingListFetched", payload: listData };
 }
 
-// export function addedToShop(data) {
-//   return { type: "shoppingList/addedToShop", payload: data };
-// }
+export function removedIngredient(data) {
+  return { type: "shoppingList/removedIngredient", payload: data };
+}
 
 //fetch all list for shoppingListpage
 export async function fetchShoppingList(dispatch, getState) {
@@ -63,5 +63,5 @@ export const removeIngredient = (id) => async (dispatch, getState) => {
 
   console.log(" Remove from your list ", response);
 
-  // dispatch(favouriteDeleted(response.data.findFav));
+  dispatch(removedIngredient(response.data.findIngredient));
 };
