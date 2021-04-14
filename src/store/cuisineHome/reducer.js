@@ -81,6 +81,16 @@ export default function cuisineHomeReducer(state = initialState, action) {
       };
     }
 
+    case "cuisineHome/cuisineDeleted": {
+      const currentCuisines = state.cuisines.filter(
+        (c) => c.id !== action.payload.id
+      );
+      return {
+        ...state,
+        cuisines: currentCuisines,
+      };
+    }
+
     default: {
       return state;
     }

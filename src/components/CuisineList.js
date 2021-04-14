@@ -52,12 +52,17 @@ export default function CuisineList(props) {
   };
 
   const checkFav = (cus) => {
-    //console.log("my favourites: ", favourites);
-
-    if (favourites.includes(cus.id)) {
-      return "🍩";
+    if (
+      favourites.find((obj) => {
+        // Returns the object where
+        // the given property has some value
+        return obj.cuisineId === cus.id;
+      })
+    ) {
+      //console.log("Inside: ", cus.id);
+      return "💜";
     } else {
-      return "🥦";
+      return "♡";
     }
   };
 

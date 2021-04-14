@@ -16,6 +16,7 @@ import DetailsPage from "./pages/DetailsPage";
 import MyFavourite from "./pages/My Favourite";
 import AddCuisineForm from "./pages/AddCuisine/AddCuisineForm";
 import ShoppingListPage from "./pages/ShoppingList/ShoppingListPage";
+import MySpacePage from "./pages/MySpacePage";
 
 function App() {
   const dispatch = useDispatch();
@@ -38,6 +39,7 @@ function App() {
         <Route path="/favourite" component={MyFavourite} />
         <Route path="/addcuisine" component={AddCuisineForm} />
         <Route path="/shopping" component={ShoppingListPage} />
+        <Route path="/space" component={MySpacePage} />
       </Switch>
     </div>
   );

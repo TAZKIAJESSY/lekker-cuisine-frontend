@@ -22,8 +22,12 @@ export function newFavouriteAdded(addData) {
   return { type: "cuisineHome/newFavouriteAdded", payload: addData };
 }
 
-export function favouriteDeleted(id) {
-  return { type: "cuisineHome/favouriteDeleted", payload: id };
+export function favouriteDeleted(data) {
+  return { type: "cuisineHome/favouriteDeleted", payload: data };
+}
+
+export function cuisineDeleted(data) {
+  return { type: "cuisineHome/cuisineDeleted", payload: data };
 }
 
 //fetch all cuisines for homepage
@@ -151,4 +155,16 @@ export const addCuisine = ({
   } catch (e) {
     console.log(e.message);
   }
+};
+
+//delete a cuisine for a user
+
+export const deleteCuisine = (id) => async (dispatch, getState) => {
+  const token = selectToken(getState());
+
+  const response = await axios.delete(`${apiUrl}/cuisines/${id}`, {
+    //id(cuisine id primary key)
+    headers: { Authorization: `Bearer ${token}` },
+  });
+  dispatch(cuisineDeleted(response.data.cuisine));
 };
