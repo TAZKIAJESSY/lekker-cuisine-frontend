@@ -14,7 +14,7 @@ export default function DetailsPage() {
 
   const cuisineDetails = useSelector(selectCuisineDetails);
 
-  //console.log("what is cuisine:", cuisineDetails);
+  console.log("what is cuisine:", cuisineDetails);
 
   useEffect(() => {
     dispatch(showDetails(id));
@@ -42,7 +42,7 @@ export default function DetailsPage() {
                 id={cuisineDetails.id}
                 title={cuisineDetails.title}
                 imageUrl={cuisineDetails.imageUrl}
-                likes={cuisineDetails.likes}
+                // likes={cuisineDetails.likes}
                 cookingTime={cuisineDetails.cookingTime}
                 instructions={cuisineDetails.instructions}
                 servings={cuisineDetails.servings}

@@ -75,15 +75,16 @@ export const updateCuisineLike = (id) => async (dispatch, getState) => {
 export async function fetchFavouriteList(dispatch, getState) {
   try {
     const { token } = selectUser(getState());
+    if (token) {
+      const response = await axios.get(`${apiUrl}/favourites`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      console.log("All favourites", response.data);
 
-    const response = await axios.get(`${apiUrl}/favourites`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-    console.log("All favourites", response.data);
-
-    dispatch(userFavFetched(response.data));
+      dispatch(userFavFetched(response.data));
+    }
   } catch (e) {
     console.log(e.message);
   }
@@ -91,20 +92,24 @@ export async function fetchFavouriteList(dispatch, getState) {
 
 //create new fav for a user
 export const addToFavourites = (cuisineId) => async (dispatch, getState) => {
-  const token = selectToken(getState());
-  const user = selectUser(getState());
+  try {
+    const token = selectToken(getState());
+    const user = selectUser(getState());
 
-  const response = await axios.post(
-    `${apiUrl}/favourites`,
-    {
-      cuisineId,
-      userId: user.id,
-    },
-    { headers: { Authorization: `Bearer ${token}` } }
-  );
+    const response = await axios.post(
+      `${apiUrl}/favourites`,
+      {
+        cuisineId,
+        userId: user.id,
+      },
+      { headers: { Authorization: `Bearer ${token}` } }
+    );
 
-  console.log("add to fav ", response);
-  dispatch(newFavouriteAdded(response.data));
+    console.log("add to fav ", response);
+    dispatch(newFavouriteAdded(response.data));
+  } catch (e) {
+    console.log(e.message);
+  }
 };
 
 //del fav from fav list

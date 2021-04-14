@@ -51,10 +51,16 @@ export default function cuisineHomeReducer(state = initialState, action) {
         }
       }
 
+      //for cuisine details
+      if (state.cuisineDetails && state.cuisineDetails.length !== 0) {
+        state.cuisineDetails.likes = action.payload.likes;
+      }
+
       return {
         ...state,
         cuisines: newArray,
         favourites: newArrayFav,
+        //cuisineDetails: newcuisineDetails,
       };
     }
 

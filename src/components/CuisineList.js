@@ -39,17 +39,24 @@ export default function CuisineList(props) {
   };
 
   const favClicked = (cuisineId, fav) => {
-    if (fav) {
-      dispatch(deleteFavourite(fav.id));
-    } else {
-      dispatch(addToFavourites(cuisineId));
-      if (token) {
-        setShowLink(false);
+    if (token) {
+      if (fav) {
+        dispatch(deleteFavourite(fav.id));
       } else {
-        setShowLink(true);
+        dispatch(addToFavourites(cuisineId));
       }
+
+      setShowLink(false);
+    } else {
+      setShowLink(true);
     }
   };
+
+  // if (token) {
+  //   setShowLink(false);
+  // } else {
+  //   setShowLink(true);
+  // }
 
   const checkFav = (cus) => {
     if (
@@ -103,18 +110,24 @@ export default function CuisineList(props) {
             >
               {checkFav(props)}
             </button>
-            <button
-              className="btn btn-basic"
-              onClick={() => {
-                //like button
-                updateLikes();
-              }}
-            >
-              👍
-            </button>
-            <span>{props.likes}</span>{" "}
+
+            {props.likes ? ( // define which page to show like button
+              <button
+                className="btn btn-basic"
+                onClick={() => {
+                  //like button
+                  updateLikes();
+                }}
+              >
+                👍
+              </button>
+            ) : null}
+
+            <span>{props.likes}</span>
           </div>
+
           <p className="card-text">{props.cookingTime} min</p>
+
           {props.servings ? (
             <p className="card-text">Servings: {props.servings} </p>
           ) : null}
