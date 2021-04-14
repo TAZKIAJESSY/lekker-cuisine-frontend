@@ -1,5 +1,4 @@
 import { useEffect } from "react";
-import Carousel from "react-bootstrap/Carousel";
 import { useDispatch, useSelector } from "react-redux";
 import { selectUser } from "../store/user/selectors";
 import { selectUserFav } from "../store/cuisineHome/selectors";
@@ -23,30 +22,34 @@ export default function MyFavourite() {
         Kitchen
       </div>
       <div style={{ fontSize: 20 }}>
-        Carousel for your fav cuisines... Hurray!!!{" "}
+        Find here your most favourite ones... <b>Hurray!!!</b>{" "}
       </div>
 
       <div style={{ margin: 200 }}>
-        <Carousel className="mt-9" style={{}}>
+        {/* <Carousel className="mt-9" style={{}}> */}
+        <div>
           {" "}
           {userFav && userFav.length !== 0 ? (
             userFav.map((f, index) => {
               return (
-                <Carousel.Item key={index} style={{ backgroundColor: "teal" }}>
+                // <Carousel.Item key={index} style={{ backgroundColor: "teal" }}>
+                <div key={index}>
                   <CuisineList
-                    id={f?.cuisine.id}
-                    title={f?.cuisine.title}
-                    imageUrl={f?.cuisine.imageUrl}
-                    likes={f?.cuisine.likes}
-                    cookingTime={f?.cuisine.cookingTime}
+                    id={f.cuisine.id}
+                    title={f.cuisine.title}
+                    imageUrl={f.cuisine.imageUrl}
+                    likes={f.cuisine.likes}
+                    cookingTime={f.cuisine.cookingTime}
                   />
-                </Carousel.Item>
+                </div>
+                // {/* </Carousel.Item> */}
               );
             })
           ) : (
-            <p>Loading....</p>
+            <p>Hi! You have nothing in your 🖤 ....</p>
           )}
-        </Carousel>
+        </div>
+        {/* </Carousel> */}
       </div>
     </div>
   );

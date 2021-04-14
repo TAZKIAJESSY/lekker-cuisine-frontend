@@ -19,6 +19,14 @@ export default function HomePage() {
   const [filterText, set_filterText] = useState();
   const [sortText, set_sortText] = useState();
 
+  useEffect(() => {
+    dispatch(fetchcuisineList);
+  }, [dispatch]);
+
+  useEffect(() => {
+    dispatch(fetchFavouriteList);
+  }, [dispatch]);
+
   const addSearchUrl = (e) => {
     e.preventDefault();
   };
@@ -57,14 +65,6 @@ export default function HomePage() {
     sortText === "Most Popular"
       ? [...searched].sort(compareLikes)
       : [...searched].sort(compareCookingTime);
-
-  useEffect(() => {
-    dispatch(fetchcuisineList);
-  }, [dispatch]);
-
-  useEffect(() => {
-    dispatch(fetchFavouriteList);
-  }, [dispatch]);
 
   return (
     <div className="container">

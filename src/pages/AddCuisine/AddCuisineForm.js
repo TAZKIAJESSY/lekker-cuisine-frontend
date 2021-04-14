@@ -15,6 +15,8 @@ export default function AddCuisineForm() {
   const user = useSelector(selectUser);
   const token = useSelector(selectToken);
 
+  const [message, set_message] = useState("");
+
   const [title, set_title] = useState("");
   const [instructions, set_instructions] = useState("");
   const [imageUrl, set_imageUrl] = useState("");
@@ -30,9 +32,33 @@ export default function AddCuisineForm() {
     },
   ]);
 
+  const uploadImage = async (e) => {
+    // console.log("triggered");
+    const files = e.target.files;
+    const data = new FormData();
+    data.append("file", files[0]);
+    data.append("upload_preset", "yqgx1df1");
+
+    const res = await fetch(
+      "https://api.cloudinary.com/v1_1/jessy/image/upload",
+      {
+        method: "POST",
+        body: data,
+      }
+    );
+
+    const file = await res.json();
+    // console.log("fiel", file.url);
+
+    set_imageUrl(file.url);
+  };
+
+  // console.log(imageUrl);
+
   const formSubmit = (event) => {
-    // event.preventDefault();
-    console.log("ajkszhfh");
+    set_message("Successfully created your new cuisine! ");
+    event.preventDefault();
+
     dispatch(
       addCuisine({
         title,
@@ -66,10 +92,10 @@ export default function AddCuisineForm() {
   const handleAddClick = () => {
     setInputIngredients([
       ...inputIngredients,
-      //   {
-      //     amount: "",
-      //     ingredientName: "",
-      //   },
+      {
+        amount: "",
+        ingredientName: "",
+      },
     ]);
     console.log(inputIngredients);
   };
@@ -100,9 +126,10 @@ export default function AddCuisineForm() {
 
       <div>
         <Container
-        //   style={{
-        //     backgroundImage: `url("https://cdn4.vectorstock.com/i/1000x1000/75/53/chef-cook-avatars-and-user-icons-vector-2567553.jpg")`,
-        //   }}
+          style={{
+            backgroundColor: "#bacccf",
+            // backgroundImage: `url("https://i.pinimg.com/originals/b2/76/71/b276712d0ffe62d9a27108aa162df28b.jpg")`,
+          }}
         >
           {" "}
           <Form as={Col} md={{ span: 6, offset: 3 }} className="mt-5">
@@ -122,8 +149,9 @@ export default function AddCuisineForm() {
                 label="Upload your image:"
                 type="file"
                 name="file"
-                value={imageUrl}
-                onChange={(event) => set_imageUrl(event.target.value)}
+                // value={imageUrl}
+                // onChange={(event) => set_imageUrl(event.target.value)}
+                onChange={uploadImage}
               />
             </Form.Group>
             <Form.Group>
@@ -246,6 +274,9 @@ export default function AddCuisineForm() {
           </Form>{" "}
         </Container>
       </div>
+      <p style={{ marginTop: 20, color: "teal", fontSize: 20 }}>
+        <b>{message}</b>
+      </p>
     </div>
   );
 }

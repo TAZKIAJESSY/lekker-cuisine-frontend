@@ -59,37 +59,27 @@ export default function cuisineHomeReducer(state = initialState, action) {
     }
 
     case "cuisineHome/userFavFetched": {
-      return { ...state, favourites: [...action.payload] };
+      return { ...state, favourites: action.payload };
     }
 
     case "cuisineHome/newFavouriteAdded": {
       return {
         ...state,
-        favourites: state.favourites.some(
-          (f) => f.cuisineId === action.payload.cuisineId
-        )
-          ? state.favourites.filter((fav) => {
-              return fav !== action.payload;
-            })
-          : state.favourites.concat(action.payload),
+        favourites: [...state.favourites, action.payload],
       };
     }
 
     case "cuisineHome/favouriteDeleted": {
       const FavId = action.payload.id;
       const newFavs = state.favourites.filter((f) => f.id !== FavId);
+
+      console.log("Current fav: ", newFavs);
+
       return {
         ...state,
         favourites: newFavs,
       };
     }
-
-    // case "cuisineHome/cuisineAdded": {
-    //   return {
-    //     ...state,
-    //     cuisines: [state.cuisines, action.payload],
-    //   };
-    // }
 
     default: {
       return state;
