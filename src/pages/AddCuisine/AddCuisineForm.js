@@ -33,7 +33,7 @@ export default function AddCuisineForm() {
   ]);
 
   const uploadImage = async (e) => {
-    console.log("triggered");
+    // console.log("triggered");
     const files = e.target.files;
     const data = new FormData();
     data.append("file", files[0]);
@@ -48,12 +48,12 @@ export default function AddCuisineForm() {
     );
 
     const file = await res.json();
-    console.log("fiel", file.url);
+    // console.log("fiel", file.url);
 
     set_imageUrl(file.url);
   };
 
-  console.log(imageUrl);
+  // console.log(imageUrl);
 
   const formSubmit = (event) => {
     set_message("Successfully created your new cuisine! ");
@@ -125,19 +125,11 @@ export default function AddCuisineForm() {
       <div>Let's start with your own adventure...</div>
 
       <div>
-        <div className="App">
-          <h1>Cloudinary Upload</h1>
-          <input
-            type="file"
-            name="file"
-            placeholder="drag it here"
-            onChange={uploadImage}
-          />
-        </div>
         <Container
-        //   style={{
-        //     backgroundImage: `url("https://cdn4.vectorstock.com/i/1000x1000/75/53/chef-cook-avatars-and-user-icons-vector-2567553.jpg")`,
-        //   }}
+          style={{
+            backgroundColor: "#bacccf",
+            // backgroundImage: `url("https://i.pinimg.com/originals/b2/76/71/b276712d0ffe62d9a27108aa162df28b.jpg")`,
+          }}
         >
           {" "}
           <Form as={Col} md={{ span: 6, offset: 3 }} className="mt-5">
@@ -158,7 +150,8 @@ export default function AddCuisineForm() {
                 type="file"
                 name="file"
                 // value={imageUrl}
-                onChange={(event) => set_imageUrl(event.target.value)}
+                // onChange={(event) => set_imageUrl(event.target.value)}
+                onChange={uploadImage}
               />
             </Form.Group>
             <Form.Group>
