@@ -26,21 +26,13 @@ export function favouriteDeleted(id) {
   return { type: "cuisineHome/favouriteDeleted", payload: id };
 }
 
-// export function cuisineAdded(addedData) {
-//   return { type: "cuisineHome/cuisineAdded", payload: addedData };
-// }
-
 //fetch all cuisines for homepage
 export async function fetchcuisineList(dispatch, getState) {
   try {
-    const getCuisine = getState().cuisineHome.cuisines;
+    const response = await axios.get(`${apiUrl}/cuisines`);
+    console.log("All cuisines", response);
 
-    if (!getCuisine.length) {
-      const response = await axios.get(`${apiUrl}/cuisines`);
-      console.log("All cuisines", response);
-
-      dispatch(allCuisineFetched(response.data));
-    }
+    dispatch(allCuisineFetched(response.data));
   } catch (e) {
     console.log(e.message);
   }
@@ -139,7 +131,6 @@ export const addCuisine = ({
   try {
     const id = parseInt(user.id);
     const token = selectToken(getState());
-    console.log("valiessd ", title, instructions);
     const response = await axios.post(
       `${apiUrl}/cuisines`,
       {
@@ -157,8 +148,6 @@ export const addCuisine = ({
     );
 
     console.log(" Add new cuisine ", response);
-
-    // dispatch(cuisineAdded(response.data));
   } catch (e) {
     console.log(e.message);
   }

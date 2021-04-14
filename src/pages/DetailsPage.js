@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import CuisineList from "../components/CuisineList";
 import { selectCuisineDetails } from "../store/cuisineHome/selectors";
 import { showDetails } from "../store/cuisineHome/actions";
+//import { fetchFavouriteList } from "../store/cuisineHome/actions";
 
 export default function DetailsPage() {
   const { id } = useParams();
@@ -18,6 +19,10 @@ export default function DetailsPage() {
   useEffect(() => {
     dispatch(showDetails(id));
   }, [dispatch, id]);
+
+  // useEffect(() => {
+  //   dispatch(fetchFavouriteList);
+  // }, [dispatch]);
 
   return (
     <div className="container">

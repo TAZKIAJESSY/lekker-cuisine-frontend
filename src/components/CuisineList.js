@@ -41,13 +41,15 @@ export default function CuisineList(props) {
     }
   };
 
-  // const checkFav = (cuisineId) => {
-  //   if (favourites.includes(cuisineId)) {
-  //     return "♡";
-  //   } else {
-  //     return "💚";
-  //   }
-  // };
+  const checkFav = (cus) => {
+    //console.log("my favourites: ", favourites);
+
+    if (favourites.includes(cus.id)) {
+      return "🍩";
+    } else {
+      return "🥦";
+    }
+  };
 
   CuisineList.defaultProps = defaultProps;
 
@@ -78,7 +80,7 @@ export default function CuisineList(props) {
               );
             }}
           >
-            💚
+            {checkFav(props)}
           </button>
           <button
             className="btn btn-basic"
