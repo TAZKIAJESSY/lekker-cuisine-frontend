@@ -2,13 +2,14 @@ import React from "react";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import { useSelector } from "react-redux";
-import { selectToken } from "../../store/user/selectors";
+import { selectToken, selectUser } from "../../store/user/selectors";
 import NavbarItem from "./NavbarItem";
 import LoggedIn from "./LoggedIn";
 import LoggedOut from "./LoggedOut";
 
 export default function Navigation() {
   const token = useSelector(selectToken);
+  const user = useSelector(selectUser);
 
   const loginLogoutControls = token ? <LoggedIn /> : <LoggedOut />;
 
@@ -27,10 +28,22 @@ export default function Navigation() {
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav style={{ width: "100%", height: 200, padding: 50 }} fill>
           <NavbarItem path="/" linkText="Cuisine" />
-          <NavbarItem path="/favourite" linkText="My 🖤 Favourite" />
-          <NavbarItem path="/addcuisine" linkText="Add Cuisine 🍂" />
-          <NavbarItem path="/shopping" linkText="Shopping List 📝" />
-          <NavbarItem path="/space" linkText="My Space 🌱" />
+
+          {user.token ? (
+            <NavbarItem path="/favourite" linkText="My 🖤 Favourite" />
+          ) : null}
+
+          {user.token ? (
+            <NavbarItem path="/addcuisine" linkText="Add Cuisine 🍂" />
+          ) : null}
+
+          {user.token ? (
+            <NavbarItem path="/shopping" linkText="Shopping List 📝" />
+          ) : null}
+
+          {user.token ? (
+            <NavbarItem path="/space" linkText="My Space 🌱" />
+          ) : null}
 
           {loginLogoutControls}
         </Nav>

@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useHistory, useParams } from "react-router-dom";
 
 import "./HomePage.css";
 import CuisineList from "../../components/CuisineList";
@@ -12,6 +13,8 @@ import { selectCuisineHome } from "../../store/cuisineHome/selectors";
 
 export default function HomePage() {
   const dispatch = useDispatch();
+  // const { searchinput } = useParams();
+  // const history = useHistory();
   const cuisines = useSelector(selectCuisineHome);
   const cloneCuisines = [...cuisines];
 
@@ -29,6 +32,8 @@ export default function HomePage() {
 
   const addSearchUrl = (e) => {
     e.preventDefault();
+    // const routeParam = encodeURIComponent(searched);
+    // history.push(`/${routeParam}`);
   };
 
   const compareLikes = (a, b) => {
