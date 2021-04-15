@@ -1,0 +1,21 @@
+.button-container {
+  margin: 30px;
+}
+/* .button-container {
+  background-color: blue;
+  font-size: 10px;
+} */
+
+.btn-deco {
+  padding-right: 30px;
+}
+
+.sort-deco {
+  padding-right: 30px;
+  margin-top: 20px;
+}
+
+.form-deco {
+  padding-left: 30px;
+  margin-top: 20px;
+}
