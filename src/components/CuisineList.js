@@ -152,45 +152,53 @@ export default function CuisineList(props) {
               <b>Instructions:</b> {props.instructions}{" "}
             </p>
           ) : null}
-          {props.ingredients ? (
-            <ol
-              style={{ listStyleType: "square", listStylePosition: "inside" }}
-            >
-              <b> Ingredient List: </b>
-              {props.ingredients.map((ing, index) => {
-                return (
-                  <li key={index}>
-                    {ing.name}
 
-                    <button
-                      onClick={() => {
-                        //details page ingredient button
-                        addList(ing.id);
-                      }}
-                      style={{
-                        marginLeft: 70,
-                        marginTop: 10,
-                        backgroundColor: "#bacccf",
-                        border: "none",
-                        color: "black",
-                        fontWeight: 500,
-                        textAlign: "center",
-                        padding: 8,
-                      }}
-                    >
-                      Add to shopping{" "}
-                    </button>
-                    <ul style={{ listStyleType: "none" }}>
-                      <li style={{ marginRight: 180 }}>{ing.amount}</li>
-                    </ul>
-                  </li>
-                );
-              })}
-            </ol>
-          ) : null}
-          <p style={{ color: "teal", marginTop: 30, marginBottom: 30 }}>
-            {message}
-          </p>
+          <div className="container">
+            {props.ingredients ? (
+              <ol
+                style={{
+                  listStyleType: "square",
+                  listStylePosition: "inside",
+                }}
+              >
+                <b> Ingredient List: </b>
+                {props.ingredients.map((ing, index) => {
+                  return (
+                    <li key={index}>
+                      {ing.name}
+
+                      <button
+                        onClick={() => {
+                          //details page ingredient button
+                          addList(ing.id);
+                        }}
+                        style={{
+                          marginLeft: 70,
+                          marginTop: 10,
+                          backgroundColor: "#bacccf",
+                          border: "none",
+                          color: "black",
+                          fontWeight: 500,
+                          textAlign: "center",
+                          padding: 8,
+                        }}
+                      >
+                        Add to shopping{" "}
+                      </button>
+                      <ul style={{ listStyleType: "none" }}>
+                        <li style={{ marginRight: 180 }}>
+                          <b> Amount: </b> {ing.cuisineingredients.amount}
+                        </li>
+                      </ul>
+                    </li>
+                  );
+                })}
+              </ol>
+            ) : null}
+            <p style={{ color: "teal", marginTop: 30, marginBottom: 30 }}>
+              {message}
+            </p>
+          </div>
           {/* <div>{user.firstName} 🧑🏼</div> */}
         </div>
       </div>

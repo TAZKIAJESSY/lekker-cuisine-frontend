@@ -19,6 +19,7 @@ import MyFavourite from "./pages/My Favourite";
 import AddCuisineForm from "./pages/AddCuisine/AddCuisineForm";
 import ShoppingListPage from "./pages/ShoppingList/ShoppingListPage";
 import MySpacePage from "./pages/MySpacePage";
+import NearByShopPape from "./pages/NearByShopPage";
 
 function App() {
   const dispatch = useDispatch();
@@ -61,6 +62,11 @@ function App() {
         />
 
         <Route
+          path="/space"
+          render={(routerProps) => protectedRoutes(MySpacePage, routerProps)}
+        />
+
+        <Route
           path="/shopping"
           render={(routerProps) =>
             protectedRoutes(ShoppingListPage, routerProps)
@@ -68,8 +74,8 @@ function App() {
         />
 
         <Route
-          path="/space"
-          render={(routerProps) => protectedRoutes(MySpacePage, routerProps)}
+          path="/shop"
+          render={(routerProps) => protectedRoutes(NearByShopPape, routerProps)}
         />
       </Switch>
     </div>

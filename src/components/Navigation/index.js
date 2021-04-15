@@ -38,11 +38,15 @@ export default function Navigation() {
           ) : null}
 
           {user.token ? (
+            <NavbarItem path="/space" linkText="My Space 🌱" />
+          ) : null}
+
+          {user.token ? (
             <NavbarItem path="/shopping" linkText="Shopping List 📝" />
           ) : null}
 
           {user.token ? (
-            <NavbarItem path="/space" linkText="My Space 🌱" />
+            <NavbarItem path="/shop" linkText="Nearby Shop" />
           ) : null}
 
           {loginLogoutControls}
