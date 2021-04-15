@@ -1,70 +1,61 @@
-# Getting Started with Create React App
+## LEKKER CUISINE SERVER 🥕🥗👩‍🍳
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Lekker Cuisine is a cooking app characterized by distinctive ingredients, techniques and dishes, and usually associated with a specific culture or geographic region. For me Cooking is an absolutely special process. Some see this as a highly artistic event, while for others it’s just a daily routine. Yet, no matter on which side you are — cooking app development is something that can help lots of people. So helping people more elaborately this app consists of shopping list of missing ingredients for a specific cuisine, a user want to try. This will encourage people to use the application more frequently (not only when they’re preparing food but also during shopping).
 
-## Available Scripts
+Here you can find the [deployed version]()
 
-In the project directory, you can run:
+### DATABASE MODEL
 
-### `npm start`
+Go To [Model](https://dbdiagram.io/d/6069e9a9ecb54e10c33e9ff0)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### WIREFRAME MODEL
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+Go To [Model](https://wireframepro.mockflow.com/view/Ma1bc87249898ec6ac46574131270eeea1617480336067#/page/5b1ab357c49e4ddea9a35aafe671a938)
 
-### `npm test`
+---
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### TECHNOLOGIES
 
-### `npm run build`
+- JavaScript
+- React
+- Redux
+- Express
+- REST API
+- Sequelize as ORM
+- PostgreSQL
+- Many-to-many models
+- Bootstrap
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### PROJECT GOAL
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- Building a full-stack app
+- Finish the whole project in 9 days deadline
+- Utilize and implement what we achieved during Codaisseur bootcamp
+- Showcase and document development skills using:
+  - make a wireframe
+  - design a data model
+  - write user stories
+  - use project board
+  - use git flow
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### USER STORY
 
-### `npm run eject`
+---
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+- #### Public User
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+  - I can see all types of cuisines and filter as well as sort them to my preferences
+  - I also can like the cuisine if i want
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+- #### Logged In User
+  - I can able to see details of every different cuisine what i want to try
+  - What if any of the items in the ingredient list is missing at home, don't be sad; I can add them to my shopping list so that i can use these to do shopping list while i am at super market
+  - If i already purchasd the item i can remove them from my to do shopping list
+  - I can add any cuisine to my bucket list as a favourite so that i can find easily when i want to try the dish
+  - I can remove any of them right away if i don't want see in my favourite list
+  - As a potential user, i can contribute and share my most valued cooking recipe with my friends
+  - And i am able to filter them any time if i don't want to share anymore
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+### CLIENT
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Go To [Server](https://github.com/TAZKIAJESSY/lekker-cuisine-backend) repo
