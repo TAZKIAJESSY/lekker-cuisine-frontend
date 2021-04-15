@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { selectUserFav } from "../store/cuisineHome/selectors";
 import { selectToken } from "../store/user/selectors";
+import { selectShoppingList } from "../store/shoppingList/selectors";
 import { fetchAdded } from "../store/shoppingList/actions";
 
 import {
@@ -15,6 +16,7 @@ export default function CuisineList(props) {
   const dispatch = useDispatch();
   const token = useSelector(selectToken);
   const favourites = useSelector(selectUserFav);
+  const items = useSelector(selectShoppingList);
 
   const [message, set_message] = useState("");
   const [showLink, setShowLink] = useState(false);
@@ -27,9 +29,19 @@ export default function CuisineList(props) {
   };
 
   const addList = (ingredientId) => {
-    console.log("add ingredientId: ", ingredientId);
-    set_message("Ingredient added to shopping list!!");
-    dispatch(fetchAdded(ingredientId));
+    //check here if the user has already that ingredient in the shopping list
+
+    const checkItemExist = items.find(
+      (obj) => obj.ingredientId === ingredientId
+    );
+
+    if (checkItemExist) {
+      set_message("Already have in your shopping list");
+    } else {
+      // console.log("add ingredientId: ", ingredientId);
+      set_message("Ingredient added to shopping list!!");
+      dispatch(fetchAdded(ingredientId));
+    }
   };
 
   const defaultProps = {
@@ -149,6 +161,7 @@ export default function CuisineList(props) {
                 return (
                   <li key={index}>
                     {ing.name}
+
                     <button
                       onClick={() => {
                         //details page ingredient button
