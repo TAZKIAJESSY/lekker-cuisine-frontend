@@ -44,7 +44,7 @@ export default function HomePage() {
   };
 
   function change_sorting(event) {
-    console.log("New filter sort", event.target.value);
+    // console.log("New filter sort", event.target.value);
     set_sortText(event.target.value);
   }
 

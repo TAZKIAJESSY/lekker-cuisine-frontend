@@ -6,6 +6,10 @@ export function shoppingListFetched(listData) {
   return { type: "shoppingList/shoppingListFetched", payload: listData };
 }
 
+export function addedIngredient(data) {
+  return { type: "shoppingList/addedIngredient", payload: data };
+}
+
 export function removedIngredient(data) {
   return { type: "shoppingList/removedIngredient", payload: data };
 }
@@ -47,7 +51,7 @@ export const fetchAdded = (ingredientId) => async (dispatch, getState) => {
     );
     console.log("Add ingredient from details page to shop", response);
 
-    //dispatch((response.data));
+    dispatch(addedIngredient(response.data));
   } catch (e) {
     console.log(e.message);
   }

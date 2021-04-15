@@ -34,7 +34,7 @@ export default function ShoppingListPage() {
       >
         <div className="row">
           <div className="col-lg-12">
-            {listIngredient && listIngredient.length !== 0 ? (
+            {listIngredient && listIngredient.length > 0 ? (
               listIngredient.map((c, index) => {
                 return (
                   <ul

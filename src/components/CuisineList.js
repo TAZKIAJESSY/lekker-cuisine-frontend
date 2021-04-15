@@ -36,6 +36,7 @@ export default function CuisineList(props) {
     servings: false,
     calories: false,
     instructions: false,
+    likes: false,
   };
 
   const favClicked = (cuisineId, fav) => {
@@ -111,17 +112,17 @@ export default function CuisineList(props) {
               {checkFav(props)}
             </button>
 
-            {props.likes ? ( // define which page to show like button
-              <button
-                className="btn btn-basic"
-                onClick={() => {
-                  //like button
-                  updateLikes();
-                }}
-              >
-                👍
-              </button>
-            ) : null}
+            {/* {props.likes ? ( // define which page to show like button */}
+            <button
+              className="btn btn-basic"
+              onClick={() => {
+                //like button
+                updateLikes();
+              }}
+            >
+              👍
+            </button>
+            {/* ) : null} */}
 
             <span>{props.likes}</span>
           </div>

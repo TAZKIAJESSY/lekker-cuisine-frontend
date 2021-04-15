@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import CuisineList from "../components/CuisineList";
 import { selectCuisineDetails } from "../store/cuisineHome/selectors";
 import { showDetails } from "../store/cuisineHome/actions";
+import { fetchShoppingList } from "../store/shoppingList/actions";
 //import { fetchFavouriteList } from "../store/cuisineHome/actions";
 
 export default function DetailsPage() {
@@ -20,9 +21,9 @@ export default function DetailsPage() {
     dispatch(showDetails(id));
   }, [dispatch, id]);
 
-  // useEffect(() => {
-  //   dispatch(fetchFavouriteList);
-  // }, [dispatch]);
+  useEffect(() => {
+    dispatch(fetchShoppingList);
+  }, [dispatch]);
 
   return (
     <div className="container">
@@ -43,6 +44,7 @@ export default function DetailsPage() {
                 title={cuisineDetails.title}
                 imageUrl={cuisineDetails.imageUrl}
                 // likes={cuisineDetails.likes}
+                likes={false}
                 cookingTime={cuisineDetails.cookingTime}
                 instructions={cuisineDetails.instructions}
                 servings={cuisineDetails.servings}
