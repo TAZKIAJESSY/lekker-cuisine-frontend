@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { selectUserFav } from "../store/cuisineHome/selectors";
 import { selectToken } from "../store/user/selectors";
+import { selectShoppingList } from "../store/shoppingList/selectors";
 import { fetchAdded } from "../store/shoppingList/actions";
 
 import {
@@ -15,6 +16,7 @@ export default function CuisineList(props) {
   const dispatch = useDispatch();
   const token = useSelector(selectToken);
   const favourites = useSelector(selectUserFav);
+  const items = useSelector(selectShoppingList);
 
   const [message, set_message] = useState("");
   const [showLink, setShowLink] = useState(false);
@@ -27,37 +29,60 @@ export default function CuisineList(props) {
   };
 
   const addList = (ingredientId) => {
-    console.log("add ingredientId: ", ingredientId);
-    set_message("Ingredient added to shopping list!!");
-    dispatch(fetchAdded(ingredientId));
+    //check here if the user has already that ingredient in the shopping list
+
+    const checkItemExist = items.find(
+      (obj) => obj.ingredientId === ingredientId
+    );
+
+    if (checkItemExist) {
+      set_message("Already have in your shopping list");
+    } else {
+      // console.log("add ingredientId: ", ingredientId);
+      set_message("Ingredient added to shopping list!!");
+      dispatch(fetchAdded(ingredientId));
+    }
   };
 
   const defaultProps = {
     servings: false,
     calories: false,
     instructions: false,
+    likes: false,
   };
 
   const favClicked = (cuisineId, fav) => {
-    if (fav) {
-      dispatch(deleteFavourite(fav.id));
-    } else {
-      dispatch(addToFavourites(cuisineId));
-      if (token) {
-        setShowLink(false);
+    if (token) {
+      if (fav) {
+        dispatch(deleteFavourite(fav.id));
       } else {
-        setShowLink(true);
+        dispatch(addToFavourites(cuisineId));
       }
+
+      setShowLink(false);
+    } else {
+      setShowLink(true);
     }
   };
 
-  const checkFav = (cus) => {
-    //console.log("my favourites: ", favourites);
+  // if (token) {
+  //   setShowLink(false);
+  // } else {
+  //   setShowLink(true);
+  // }
 
-    if (favourites.includes(cus.id)) {
-      return "🍩";
+  const checkFav = (cus) => {
+    if (
+      favourites.find((obj) => {
+        // Returns the object where
+        // the given property has some value
+        return obj.cuisineId === cus.id;
+      })
+    ) {
+      //console.log("Inside: ", cus.id);
+      return "💜";
     } else {
-      return "🥦";
+      return "♡";
     }
   };
 
@@ -98,6 +123,8 @@ export default function CuisineList(props) {
             >
               {checkFav(props)}
             </button>
+
+            {/* {props.likes ? ( // define which page to show like button */}
             <button
               className="btn btn-basic"
               onClick={() => {
@@ -107,9 +134,13 @@ export default function CuisineList(props) {
             >
               👍
             </button>
-            <span>{props.likes}</span>{" "}
+            {/* ) : null} */}
+
+            <span>{props.likes}</span>
           </div>
+
           <p className="card-text">{props.cookingTime} min</p>
+
           {props.servings ? (
             <p className="card-text">Servings: {props.servings} </p>
           ) : null}
@@ -130,6 +161,7 @@ export default function CuisineList(props) {
                 return (
                   <li key={index}>
                     {ing.name}
+
                     <button
                       onClick={() => {
                         //details page ingredient button

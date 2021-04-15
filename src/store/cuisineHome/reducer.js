@@ -51,10 +51,16 @@ export default function cuisineHomeReducer(state = initialState, action) {
         }
       }
 
+      //for cuisine details
+      if (state.cuisineDetails && state.cuisineDetails.length !== 0) {
+        state.cuisineDetails.likes = action.payload.likes;
+      }
+
       return {
         ...state,
         cuisines: newArray,
         favourites: newArrayFav,
+        //cuisineDetails: newcuisineDetails,
       };
     }
 
@@ -78,6 +84,16 @@ export default function cuisineHomeReducer(state = initialState, action) {
       return {
         ...state,
         favourites: newFavs,
+      };
+    }
+
+    case "cuisineHome/cuisineDeleted": {
+      const currentCuisines = state.cuisines.filter(
+        (c) => c.id !== action.payload.id
+      );
+      return {
+        ...state,
+        cuisines: currentCuisines,
       };
     }
 

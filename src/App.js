@@ -1,25 +1,33 @@
 import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Switch, Route, Redirect } from "react-router-dom";
+
 import "./App.css";
 
-import { Switch, Route } from "react-router-dom";
+import { selectAppLoading } from "./store/appState/selectors";
+import { getUserWithStoredToken } from "./store/user/actions";
+import { selectToken } from "./store/user/selectors";
+
 import Navigation from "./components/Navigation";
 import Loading from "./components/Loading/Loading";
 import MessageBox from "./components/MessageBox/MessageBox";
 import HomePage from "./pages/Home/HomePage";
 import SignUp from "./pages/SignUp/SignUpPage";
 import Login from "./pages/Login/LoginPage";
-
-import { useDispatch, useSelector } from "react-redux";
-import { selectAppLoading } from "./store/appState/selectors";
-import { getUserWithStoredToken } from "./store/user/actions";
 import DetailsPage from "./pages/DetailsPage";
 import MyFavourite from "./pages/My Favourite";
 import AddCuisineForm from "./pages/AddCuisine/AddCuisineForm";
 import ShoppingListPage from "./pages/ShoppingList/ShoppingListPage";
+import MySpacePage from "./pages/MySpacePage";
 
 function App() {
   const dispatch = useDispatch();
+  const token = useSelector(selectToken);
   const isLoading = useSelector(selectAppLoading);
+
+  const protectedRoutes = (Component, routerProps) => {
+    return token ? <Component {...routerProps} /> : <Redirect to="/login" />;
+  };
 
   useEffect(() => {
     dispatch(getUserWithStoredToken());
@@ -29,15 +37,40 @@ function App() {
     <div className="App">
       <Navigation />
       <MessageBox />
+
       {isLoading ? <Loading /> : null}
+
       <Switch>
         <Route exact path="/" component={HomePage} />
         <Route path="/signup" component={SignUp} />
         <Route path="/login" component={Login} />
-        <Route path="/details/:id" component={DetailsPage} />
-        <Route path="/favourite" component={MyFavourite} />
-        <Route path="/addcuisine" component={AddCuisineForm} />
-        <Route path="/shopping" component={ShoppingListPage} />
+
+        <Route
+          path="/details/:id"
+          render={(routerProps) => protectedRoutes(DetailsPage, routerProps)}
+        />
+
+        <Route
+          path="/favourite"
+          render={(routerProps) => protectedRoutes(MyFavourite, routerProps)}
+        />
+
+        <Route
+          path="/addcuisine"
+          render={(routerProps) => protectedRoutes(AddCuisineForm, routerProps)}
+        />
+
+        <Route
+          path="/shopping"
+          render={(routerProps) =>
+            protectedRoutes(ShoppingListPage, routerProps)
+          }
+        />
+
+        <Route
+          path="/space"
+          render={(routerProps) => protectedRoutes(MySpacePage, routerProps)}
+        />
       </Switch>
     </div>
   );
