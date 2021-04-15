@@ -5,7 +5,7 @@ import Container from "react-bootstrap/Container";
 import Button from "react-bootstrap/Button";
 import { Col } from "react-bootstrap";
 
-import { selectLoading, selectNearByStores } from "../store/nearShop/selectors";
+import { selectNearByStores } from "../store/nearShop/selectors";
 
 import { storeDataLoading, fetchStore } from "../store/nearShop/actions";
 
