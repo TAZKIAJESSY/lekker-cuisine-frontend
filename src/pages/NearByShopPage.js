@@ -81,7 +81,7 @@ export default function NearByShopPape() {
                       <li>Address: {n.vicinity} </li>
                       <li>
                         Shop status now:{" "}
-                        {n.opening_hours.open_now ? "Open" : "Closed"}{" "}
+                        {n.opening_hours.open_now ? "✔️" : "🔴"}{" "}
                       </li>
                     </ul>
                   );
