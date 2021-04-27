@@ -45,9 +45,7 @@ export default function Navigation() {
             <NavbarItem path="/shopping" linkText="Shopping List 📝" />
           ) : null}
 
-          {user.token ? (
-            <NavbarItem path="/shop" linkText="Nearby Shop" />
-          ) : null}
+          <NavbarItem path="/shop" linkText="Nearby Shop" />
 
           {loginLogoutControls}
         </Nav>
