@@ -19,7 +19,7 @@ import MyFavourite from "./pages/My Favourite";
 import AddCuisineForm from "./pages/AddCuisine/AddCuisineForm";
 import ShoppingListPage from "./pages/ShoppingList/ShoppingListPage";
 import MySpacePage from "./pages/MySpacePage";
-import NearByShopPape from "./pages/NearByShopPage";
+import NearByShopPage from "./pages/NearByShopPage";
 
 function App() {
   const dispatch = useDispatch();
@@ -73,10 +73,7 @@ function App() {
           }
         />
 
-        <Route
-          path="/shop"
-          render={(routerProps) => protectedRoutes(NearByShopPape, routerProps)}
-        />
+        <Route path="/shop" component={NearByShopPage} />
       </Switch>
     </div>
   );
