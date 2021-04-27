@@ -1,75 +1,68 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+
 import Form from "react-bootstrap/Form";
 import Container from "react-bootstrap/Container";
 import Button from "react-bootstrap/Button";
 import { Col } from "react-bootstrap";
+import { fetchStore } from "../store/nearShop/actions";
+import { selectStores } from "../store/nearShop/selectors";
 
-import { selectNearByStores } from "../store/nearShop/selectors";
-
-import { storeDataLoading, fetchStore } from "../store/nearShop/actions";
-
-export default function NearByShopPape() {
+export default function NearByShopPage() {
+  const [location, set_location] = useState("");
   const dispatch = useDispatch();
+  const allStore = useSelector(selectStores);
 
-  const [currentLocation, setCurrentLocation] = useState({
-    lattitude: "",
-    longtitude: "",
-  });
-
-  //const isLoading = useSelector(selectLoading);
-  const nearestStores = useSelector(selectNearByStores);
-
-  function success(position) {
-    const lat = position.coords.latitude.toFixed(3);
-    const long = position.coords.longitude.toFixed(3);
-    setCurrentLocation({ lattitude: lat, longtitude: long });
-
-    console.log("currentLocation", currentLocation);
-  }
-  function error(err) {
-    console.warn(`ERROR(${err.code}): ${err.message}`);
-  }
-  const options = {
-    enableHighAccuracy: true,
-    timeout: 30000,
-    maximumAge: Infinity,
+  const onSubmitChange = (event) => {
+    event.preventDefault();
+    console.log("hi");
+    dispatch(fetchStore(location));
+    set_location("");
   };
-
-  const fetchNearByStore = () => {
-    navigator.geolocation.getCurrentPosition(success, error, options); //to collect coordinates
-  };
-
-  useEffect(() => {
-    dispatch(fetchStore(currentLocation));
-  }, [dispatch, currentLocation]);
 
   return (
-    <Container>
-      <Form as={Col} md={{ span: 6, offset: 3 }} className="mt-5">
-        <Button
-          variant="primary"
-          type="submit"
-          onClick={() => {
-            dispatch(storeDataLoading());
-            fetchNearByStore();
-          }}
+    <div>
+      <Container>
+        <Form
+          as={Col}
+          md={{ span: 6, offset: 3 }}
+          className="mt-5"
+          // onSubmit={onSubmitChange}
         >
-          Search stores near me
-        </Button>
-        <div
-          className="card shadow-lg mb-4"
-          style={{
-            marginTop: 100,
-          }}
-        >
-          <div className="card-body pb-0">
-            <div className="col-lg-12">
-              {nearestStores && nearestStores.length > 0 ? (
-                nearestStores.map((n, index) => {
-                  return (
+          <h1
+            className="mt-5 mb-5"
+            style={{ color: "brown", fontFamily: "oblique" }}
+          >
+            All Supermarket By Specific Area
+          </h1>
+          <Form.Group>
+            <Form.Label>Type your desired location</Form.Label>
+            <Form.Control
+              value={location}
+              onChange={(event) => set_location(event.target.value)}
+              type="text"
+              placeholder="Enter location"
+              required
+            />
+          </Form.Group>
+          <Button type="submit" onClick={onSubmitChange}>
+            Submit
+          </Button>
+        </Form>
+      </Container>
+
+      <div
+        style={{
+          marginTop: 100,
+          backgroundColor: "#bacccf",
+        }}
+      >
+        <div>
+          {allStore && allStore.length > 0
+            ? allStore.map((n, index) => {
+                return (
+                  <div className="col-lg-1/12" key={index}>
                     <ul
-                      key={index}
                       style={{
                         listStyleType: "square",
                         listStylePosition: "inside",
@@ -79,20 +72,20 @@ export default function NearByShopPape() {
                         <b> {n.name}</b>{" "}
                       </li>
                       <li>Address: {n.vicinity} </li>
-                      <li>
-                        Shop status now:{" "}
-                        {n.opening_hours.open_now ? "✔️" : "🔴"}{" "}
-                      </li>
+
+                      {n.opening_hours ? (
+                        <li>
+                          Shop status now:{" "}
+                          {n.opening_hours.open_now ? "✔️" : "🔴"}{" "}
+                        </li>
+                      ) : null}
                     </ul>
-                  );
-                })
-              ) : (
-                <p>"Click to get the nearest stores!!!"</p>
-              )}
-            </div>
-          </div>
+                  </div>
+                );
+              })
+            : null}
         </div>
-      </Form>
-    </Container>
+      </div>
+    </div>
   );
 }

@@ -1,5 +1,6 @@
 const initialState = {
-  nearestStores: [],
+  stores: [],
+  loading: false,
 };
 
 export default function cuisineHomeReducer(state = initialState, action) {
@@ -14,7 +15,7 @@ export default function cuisineHomeReducer(state = initialState, action) {
       return {
         ...state,
         loading: false,
-        nearestStores: action.payload,
+        stores: action.payload,
       };
     }
 
