@@ -1,5 +1,5 @@
 export const selectLoading = (reduxState) => reduxState.nearShop.loading;
 
-export const selectNearByStores = (reduxState) => {
-  return reduxState.nearShop.nearestStores;
+export const selectStores = (reduxState) => {
+  return reduxState.nearShop.stores;
 };
