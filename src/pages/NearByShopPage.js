@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import Form from "react-bootstrap/Form";
@@ -19,11 +19,6 @@ export default function NearByShopPage() {
     dispatch(fetchStore(location));
     set_location("");
   };
-
-  // useEffect(() => {
-  //   dispatch(fetchStore(location));
-  //   set_location("");
-  // }, [dispatch]);
 
   return (
     <div>
