@@ -8,7 +8,7 @@ Here you can find the [deployed version](https://lekker-cuisine-client.netlify.a
 
 <div align="center">
 	<br>
-		<img src="https://res.cloudinary.com/jessy/image/upload/v1619606829/lek-cuisine_y684nv.gif"  alt="Click to see the source">
+		<img src="https://res.cloudinary.com/jessy/image/upload/v1619609777/lek-new_m7x3ad.gif"  alt="Click to see the source">
 	</a>
 	<br>
 </div>
