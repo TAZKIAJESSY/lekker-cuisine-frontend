@@ -2,6 +2,10 @@ import axios from "axios";
 import { apiUrl } from "../../confiig/constants";
 import { selectUser, selectToken } from "../user/selectors";
 
+export function cuisineLoading() {
+  return { type: "cuisineHome/cuisineLoading" };
+}
+
 export function allCuisineFetched(cuisineList) {
   return { type: "cuisineHome/allCuisineFetched", payload: cuisineList };
 }
@@ -32,6 +36,7 @@ export function cuisineDeleted(data) {
 
 //fetch all cuisines for homepage
 export async function fetchcuisineList(dispatch, getState) {
+  dispatch(cuisineLoading());
   try {
     const response = await axios.get(`${apiUrl}/cuisines`);
     console.log("All cuisines", response);
@@ -126,41 +131,43 @@ export const deleteFavourite = (favId) => async (dispatch, getState) => {
 };
 
 //add new cuisine
-export const addCuisine = ({
-  title,
-  instructions,
-  imageUrl,
-  cuisineType,
-  servings,
-  cookingTime,
-  calories,
-  user,
-  inputIngredients,
-}) => async (dispatch, getState) => {
-  try {
-    const id = parseInt(user.id);
-    const token = selectToken(getState());
-    const response = await axios.post(
-      `${apiUrl}/cuisines`,
-      {
-        title: title,
-        instructions: instructions,
-        imageUrl: imageUrl,
-        cuisineType: cuisineType,
-        servings: servings,
-        cookingTime: cookingTime,
-        calories: calories,
-        ingredients: inputIngredients,
-        userId: id,
-      },
-      { headers: { Authorization: `Bearer ${token}` } }
-    );
+export const addCuisine =
+  ({
+    title,
+    instructions,
+    imageUrl,
+    cuisineType,
+    servings,
+    cookingTime,
+    calories,
+    user,
+    inputIngredients,
+  }) =>
+  async (dispatch, getState) => {
+    try {
+      const id = parseInt(user.id);
+      const token = selectToken(getState());
+      const response = await axios.post(
+        `${apiUrl}/cuisines`,
+        {
+          title: title,
+          instructions: instructions,
+          imageUrl: imageUrl,
+          cuisineType: cuisineType,
+          servings: servings,
+          cookingTime: cookingTime,
+          calories: calories,
+          ingredients: inputIngredients,
+          userId: id,
+        },
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
 
-    console.log(" Add new cuisine ", response);
-  } catch (e) {
-    console.log(e.message);
-  }
-};
+      console.log(" Add new cuisine ", response);
+    } catch (e) {
+      console.log(e.message);
+    }
+  };
 
 //delete a cuisine for a user
 
