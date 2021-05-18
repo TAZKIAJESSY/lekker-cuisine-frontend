@@ -1,3 +1,7 @@
+export const selectCuisineLoading = (reduxState) => {
+  return reduxState.cuisineHome.loading;
+};
+
 export const selectCuisineHome = (reduxState) => {
   return reduxState.cuisineHome.cuisines;
 };

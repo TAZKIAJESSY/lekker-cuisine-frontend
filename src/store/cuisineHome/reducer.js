@@ -1,14 +1,20 @@
 const initialState = {
   cuisines: [],
+  loading: false,
   cuisineDetails: null,
   favourites: [],
 };
 
 export default function cuisineHomeReducer(state = initialState, action) {
   switch (action.type) {
+    case "cuisineHome/cuisineLoading": {
+      return { ...state, loading: true };
+    }
+
     case "cuisineHome/allCuisineFetched": {
       return {
         ...state,
+        loading: false,
         cuisines: action.payload,
       };
     }

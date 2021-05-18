@@ -15,9 +15,6 @@ export default function Navigation() {
 
   return (
     <Navbar bg="light" expand="lg">
-      {/* <Navbar.Brand as={NavLink} to="/" activeStyle={{ color: "teal" }}>
-        Cuisine{" "}
-      </Navbar.Brand> */}
       <Navbar.Brand
         style={{ color: "teal", fontStyle: "oblique", fontSize: 58 }}
       >
@@ -26,7 +23,15 @@ export default function Navigation() {
 
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
-        <Nav style={{ width: "100%", height: 200, padding: 50 }} fill>
+        <Nav
+          style={{
+            width: "100%",
+            height: 200,
+            padding: 50,
+            backgroundColor: "#acbabd",
+          }}
+          fill
+        >
           <NavbarItem path="/" linkText="Cuisine" />
 
           {user.token ? (
