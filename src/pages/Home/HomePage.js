@@ -1,3 +1,5 @@
+import { Spinner } from "react-bootstrap";
+
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -7,13 +9,17 @@ import {
   fetchcuisineList,
   fetchFavouriteList,
 } from "../../store/cuisineHome/actions";
-import { selectCuisineHome } from "../../store/cuisineHome/selectors";
+import {
+  selectCuisineLoading,
+  selectCuisineHome,
+} from "../../store/cuisineHome/selectors";
 //import { selectUserFav } from "../../store/cuisineHome/selectors";
 
 export default function HomePage() {
   const dispatch = useDispatch();
   // const { searchinput } = useParams();
   // const history = useHistory();
+  const loading = useSelector(selectCuisineLoading);
   const cuisines = useSelector(selectCuisineHome);
   const cloneCuisines = [...cuisines];
 
@@ -72,7 +78,7 @@ export default function HomePage() {
 
   return (
     <div className="container">
-      <div className="button-container">
+      <div className="button-container" style={{ marginTop: 80 }}>
         <div className="row">
           <div className="btn-deco">
             {" "}
@@ -156,9 +162,46 @@ export default function HomePage() {
           </div>
         </div>
       </div>{" "}
-      <div className="card-container">
+      <div>
+        {loading ? (
+          <div
+            className="d-flex justify-content-center align-items-center mt-5"
+            style={{ height: 700, margin: "auto" }}
+          >
+            <Spinner animation="border" role="status">
+              <span className="sr-only">Loading...</span>
+            </Spinner>
+          </div>
+        ) : (
+          <div className="card-container" style={{ marginTop: 70 }}>
+            <div className="row">
+              {cuisines_sorted ? (
+                cuisines_sorted.map((cui, index) => {
+                  return (
+                    <div className="col-lg-3" key={index}>
+                      <CuisineList
+                        id={cui.id}
+                        title={cui.title}
+                        imageUrl={cui.imageUrl}
+                        likes={cui.likes}
+                        cookingTime={cui.cookingTime}
+                        // servings={false}
+                        // instructions={false}
+                        // calories={false}
+                      />
+                    </div>
+                  );
+                })
+              ) : (
+                <p></p>
+              )}{" "}
+            </div>
+          </div>
+        )}
+      </div>
+      {/* <div className="card-container" style={{ marginTop: 70 }}>
         <div className="row">
-          {cuisines_sorted && cuisines_sorted.length !== 0 ? (
+          {cuisines_sorted ? (
             cuisines_sorted.map((cui, index) => {
               return (
                 <div className="col-lg-3" key={index}>
@@ -176,10 +219,10 @@ export default function HomePage() {
               );
             })
           ) : (
-            <p>No cuisine found...</p>
-          )}
+            <p></p>
+          )}{" "}
         </div>
-      </div>
+      </div> */}
     </div>
   );
 }
