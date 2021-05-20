@@ -154,10 +154,6 @@ export default function CuisineList(props) {
           ) : null}
 
           <div className="container">
-            <p>
-              {" "}
-              <b> Ingredient List: </b>
-            </p>
             {props.ingredients ? (
               <ol
                 style={{
@@ -165,6 +161,8 @@ export default function CuisineList(props) {
                   listStylePosition: "inside",
                 }}
               >
+                <b> Ingredient List: </b>
+
                 {props.ingredients.map((ing, index) => {
                   return (
                     <li
