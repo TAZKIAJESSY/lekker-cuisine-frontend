@@ -106,7 +106,7 @@ export default function HomePage() {
               value="French"
               onClick={(e) => set_filterText(e.target.value)}
             >
-              spanish
+              French
             </button>
             <button
               style={{
